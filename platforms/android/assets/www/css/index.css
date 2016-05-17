@@ -1,0 +1,138 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+@font-face {
+    font-family: font7segmentos;
+    src: url('../fonts/DSEG7Classic-BoldItalic.woff');
+}
+
+
+.ui-body-e {
+    background-color:#fbef7e !important;
+}
+.ui-header-fixed {
+
+    color:white !important;
+    font-family: cursive !important;
+    font-size: 1em;
+    letter-spacing: 2px !important; 
+    background-color: black!important;
+    border-top-color:blue !important; 
+    border-top-width: 3px !important;
+    border-bottom-color:blue !important; 
+    border-bottom-width: 3px !important;
+}
+.ui-header-fixed a{
+    background-color: black !important;  
+    border:0;
+    /*padding-right: 8px;*/
+    padding-top: 30px;
+
+}
+
+
+.ui-content {
+
+    margin : 0px;
+    padding: 0px;
+    
+    position : absolute !important; 
+    top : 0px !important;  
+    right : 0px !important;  
+    bottom : 0px !important;  
+    left : 0px !important; 
+    color: white !important;
+    background-color: black !important;
+    /*  display: inline !important; 
+      /*background-image: url("../img/fondo_negro.jpg") !important; */
+}
+
+
+
+
+
+
+
+button {
+    box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
+    border-radius: 1.0em !important;
+    color : white !important;
+    background:linear-gradient( #404040,#828282 )  !important;
+    background:-webkit-linear-gradient( #404040,#828282 )  !important;
+    text-align: center !important;
+    margin: .6em .6em .6em .6em;
+}
+
+
+
+
+
+
+
+#popupAbout{
+
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
+    -ms-box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
+    box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
+    width:10em;
+}
+
+
+
+
+
+#warning-message { display: none; }
+@media only screen and (orientation:landscape){
+    #main { display:none; }
+    #warning-message { display:block; }
+}
+@media only screen and (orientation:portrait){
+    #warning-message { display:none; }
+}
+
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+        /* offset horizontal: half of image width and text area width */
+    }
+}
+
+
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
