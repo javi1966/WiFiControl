@@ -25,28 +25,32 @@
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
         <title>Wifi Control</title>
     </head>
- 
-    
+
+
     <body>
-        
-        
+
+
         <div data-role="page" id="main">
-            
-           <div data-role="header" class="ui-header-fixed  ui-shadow">
+
+            <div data-role="header" class="ui-header-fixed  ui-shadow">
                 <a href="#" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-power"></a> 
                 <a href="#" id="btnAbout"  class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-info"></a> 
                 <h1 >WiFi Control</h1>
-                
-           </div><!-- /header --> 
-            
+
+            </div><!-- /header --> 
+
             <div role ="main" class="ui-content">
-                
-                
+
+
                 <br/><br/><br/>
-                
-                <button id="btnValor">Dame valor</button>
-                
-                
+
+                <button id="btnValorTension">Dame Valor Tension</button>
+                <button id="btnValorCorriente">Dame Valor Corriente</button>
+                <br/><br/><br/>
+                <div id = "valor" >
+                    
+                </div>
+
                 <div data-role="popup" id="popupAbout" style="background-color: black;" data-transition="flip"  class="ui-corner-all">
                     <div data-role="header"  style="margin-left:1%;margin-right:1%;margin-top:1%;background-color: black;"  class="ui-corner-all">
                         <h1 style="text-align:center;color:white;">About</h1>
@@ -56,12 +60,12 @@
                     <a href="#" style="background-color:orange;margin:5% 15% 5% 15%;color:white;" data-role="button" data-rel="back" >Cerrar</a>
 
                 </div>  <!-- POPUP ABOUT -->
-            
+
             </div> <!-- Contenido -->
-            
-            
+
+
         </div> <!-- Pagina Principal -->
-        
+
         <div id="warning-message" >
             <h2 style="text-align:center;color:red;">Esta APP solo se ve en PORTRAIT</h2>
         </div>
@@ -70,6 +74,6 @@
         <script type="text/javascript">
             app.initialize();
         </script>
-        
+
     </body>
 </html>

@@ -68,7 +68,8 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnValor.ontouchstart=app.dame_valor;
+        btnValorTension.ontouchstart = app.dame_valor;
+        btnValorCorriente.ontouchstart = app.dame_valor;
         btnCerrar.ontouchstart = app.cerrar;
         btnAbout.onclick = app.about;
         console.log("bindEvents:");
@@ -78,27 +79,32 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-        
-        
+
+
         app.receivedEvent('deviceready');
         $(document).bind("resume", app.onResumedApp);
+        $(document).bind("offline", app.onLineWiFi);
         console.log("onDeviceReady");
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         toast("Iniciando...");
-        
-        if(!window.navigator.onLine){
-            
+
+        if (!window.navigator.onLine) {
+
+
             navigator.notification.confirm(
-                'Wifi no Encendido',
-                app.onWifiOn,
-                'Confirma Wifi',
-                ['OK']
-                );
-            
+                    'Wifi no Encendido',
+                    app.onWifiOn,
+                    'Confirma Wifi',
+                    ['OK']
+                    );
+
+
+
+
         }
-     
+
         console.log('Received Event: ' + id);
     },
     onWifiOn: function (buttonIndex) {
@@ -139,24 +145,118 @@ var app = {
     }
     ,
     onResumedApp: function () {
-        
-        if(!window.navigator.onLine){
-            
+
+        if (!window.navigator.onLine) {
+
+
             navigator.notification.confirm(
+                    'Wifi no Encendido',
+                    app.onWifiOn,
+                    'Confirma Wifi',
+                    ['OK']
+                    );
+
+
+
+        }
+
+        toast("Salida De Pausa de APP");
+
+    },
+    dame_valor: function (e) {
+        var valHttp = ["http://192.168.4.1/MonitorEnergia/voltaje.json",
+            "http://192.168.4.1/MonitorEnergia/corriente.json"]
+
+        var id = $(this).attr('id');
+
+
+
+        //toast("Obteniendo valores");
+
+        switch (id) {
+            case "btnValorTension":
+
+                $.getJSON(valHttp[0], function (vj) {
+                    $("#valor").html("Tension: " + vj.Tension.Valor);
+
+                    if (vj.Tension.status === "OK")
+                        $("#valor").css({"background-color": "#cc0"});
+                    else if (vj.Tension.status === "NOK")
+                        $("#valor").css({"background-color": "red"})
+
+                    console.log("ff: " + vj.Tension.Valor)
+
+                })
+                .error(function () {
+                            navigator.notification.confirm(
+                                    'AP Hello_IoT no selec.',
+                                    app.onWifiOn,
+                                    'Confirma Wifi',
+                                    ['OK']
+                                    );
+                        });
+                break;
+            case "btnValorCorriente":
+
+                $.getJSON(valHttp[1], function (vj) {
+                    $("#valor").html("Corriente: " + vj.Corriente.Valor);
+
+                    if (vj.Corriente.status === "OK")
+                        $("#valor").css({"background-color": "#cc0"});
+                    else if (vj.Corriente.status === "NOK")
+                        $("#valor").css({"background-color": "red"})
+
+
+
+                    console.log("ff: " + vj.Corriente.Valor)
+                })
+                 .error(function () {
+
+                            navigator.notification.confirm(
+                                    'AP Hello_IoT no selec.',
+                                    app.onWifiOn,
+                                    'Confirma Wifi',
+                                    ['OK']
+                                    );
+                        });
+                        
+                break;
+            default:
+                break;
+        }
+
+
+
+
+        /*
+         $.ajax({url: val,
+         success: function (result) {
+         
+         
+         
+         console.log("Resultado: " + result);
+         },
+         error: function (xhr, status) {
+         toast("Error de conexion");
+         console.log("Error: " + status + " " + xhr);
+         }
+         
+         });*/
+        console.log("dame_valor");
+
+    }
+    ,
+    onLineWiFi: function () {
+
+
+        navigator.notification.confirm(
                 'Wifi no Encendido',
                 app.onWifiOn,
                 'Confirma Wifi',
                 ['OK']
                 );
-            
-        }
-        toast("Salida De Pausa de APP");
-
-    },
-    dame_valor: function () {
-        toast("Obteniendo valores") ;
-        console.log("dame_valor");
-        
+        console.log("onLineWiFi");
     }
+
 
 };//fin app
