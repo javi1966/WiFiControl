@@ -70,6 +70,7 @@ var app = {
          popOK.ontouchstart = app.ponAlarma;*/
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
+        btnValorPanel.ontouchstart = app.dame_valor;
         btnCerrar.ontouchstart = app.cerrar;
         btnAbout.onclick = app.about;
         console.log("bindEvents:");
@@ -84,6 +85,7 @@ var app = {
         app.receivedEvent('deviceready');
         $(document).bind("resume", app.onResumedApp);
         $(document).bind("offline", app.onLineWiFi);
+        $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul)
         console.log("onDeviceReady");
     },
     // Update DOM on a Received Event
@@ -187,7 +189,7 @@ var app = {
                     console.log("ff: " + vj.Tension.Valor)
 
                 })
-                .error(function () {
+                        .error(function () {
                             navigator.notification.confirm(
                                     'AP Hello_IoT no selec.',
                                     app.onWifiOn,
@@ -210,7 +212,7 @@ var app = {
 
                     console.log("ff: " + vj.Corriente.Valor)
                 })
-                 .error(function () {
+                        .error(function () {
 
                             navigator.notification.confirm(
                                     'AP Hello_IoT no selec.',
@@ -219,7 +221,18 @@ var app = {
                                     ['OK']
                                     );
                         });
-                        
+
+                break;
+
+            case "btnValorPanel":
+
+
+                $("#resulPanel").panel("open");
+
+
+
+
+                console.log("btnValorPanel");
                 break;
             default:
                 break;
@@ -256,6 +269,42 @@ var app = {
                 ['OK']
                 );
         console.log("onLineWiFi");
+    }
+    ,
+    onPanelResul: function (e, ui) {
+
+        var panel = this;
+        var buf = "";
+        buf = "<p>Hola</p>";
+
+        $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
+
+
+        $.getJSON("http://192.168.4.1/MonitorEnergia/voltaje.json"
+            , function (vj) {
+            $("p.medida", panel).html("Corriente: " + vj.Corriente.Valor);
+
+            if (vj.Corriente.status === "OK")
+                 $("p.medida", panel).css({"background-color": "#cc0"});
+            else if (vj.Corriente.status === "NOK")
+                 $("p.medida", panel).css({"background-color": "red"})
+
+            console.log("ff: " + vj.Corriente.Valor)
+               })
+                .error(function () {
+
+                    navigator.notification.confirm(
+                            'AP Hello_IoT no selec.',
+                            app.onWifiOn,
+                            'Confirma Wifi',
+                            ['OK']
+                            );
+                });
+
+
+        //$("p.medida", panel).append(buf);
+        $(panel).trigger("updatelayout");
+        console.log("onPanelResul");
     }
 
 

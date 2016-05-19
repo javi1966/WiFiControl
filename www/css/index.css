@@ -90,6 +90,22 @@ button {
     
 }
 
+#resulPanel{
+   color:white; 
+   background:linear-gradient( #404040,#828282 )  ;
+   background:-webkit-linear-gradient( #404040,#828282 )  ;
+   
+}
+
+#resulPanel h1{
+    
+    
+    text-align: center;
+    border-bottom-color:white  ; 
+    border-bottom-width: 3px ;
+    
+}
+
 
 
 

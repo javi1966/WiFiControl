@@ -33,8 +33,8 @@
         <div data-role="page" id="main">
 
             <div data-role="header" class="ui-header-fixed  ui-shadow">
-                <a href="#" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-power"></a> 
-                <a href="#" id="btnAbout"  class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-info"></a> 
+                <a href="#" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-power ui-shadow-icon"></a> 
+                <a href="#" id="btnAbout"  class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-info ui-shadow-icon"></a> 
                 <h1 >WiFi Control</h1>
 
             </div><!-- /header --> 
@@ -44,8 +44,9 @@
 
                 <br/><br/><br/>
 
-                <button id="btnValorTension">Dame Valor Tension</button>
-                <button id="btnValorCorriente">Dame Valor Corriente</button>
+                <button id="btnValorTension" class="ui-btn ui-shadow ui-btn-active">Dame Valor Tension</button>
+                <button id="btnValorCorriente" class="ui-btn ui-shadow ui-btn-active">Dame Valor Corriente</button>
+                <button id="btnValorPanel" class="ui-btn ui-shadow ui-btn-active">Dame Valor Panel</button>
                 <br/><br/><br/>
                 <div id = "valor" >
                     
@@ -57,11 +58,23 @@
                     </div>
                     <p style="text-align:center;color:graytext;font-size: 1.5em;">Wifi Control</p>
                     <p style="text-align:center;color:graytext;font-size: 1.3em;">&copy;Javier Espinosa Guerra</p>
-                    <a href="#" style="background-color:orange;margin:5% 15% 5% 15%;color:white;" data-role="button" data-rel="back" >Cerrar</a>
+                    <a href="#" style="background-color:orange;margin:5% 15% 5% 15%;color:white;"  class="ui-btn ui-shadow ui-corner-all" data-rel="back" >Cerrar</a>
 
                 </div>  <!-- POPUP ABOUT -->
 
             </div> <!-- Contenido -->
+            
+            <div  data-role="panel" data-position="left" data-display="push" id="resulPanel">
+                <h1>Resultado</h1>    
+                <p class="medida">
+                </p>
+                <p>
+                <a href="#" style="background-color:orange;margin:5% 15% 5% 15%;color:white;"
+                   data-rel="close"  class="ui-btn ui-shadow ui-corner-all">Cierra</a>
+                </p>
+                
+            </div> <!--Panel -->
+                
 
 
         </div> <!-- Pagina Principal -->
