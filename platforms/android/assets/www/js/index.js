@@ -274,18 +274,21 @@ var app = {
     onPanelResul: function (e, ui) {
 
         var panel = this;
-        var buf = "";
-        buf = "<p>Hola</p>";
+       
 
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
 
 
-        $.getJSON("http://192.168.4.1/MonitorEnergia/voltaje.json"
+        $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
             , function (vj) {
             $("p.medida", panel).html("Corriente: " + vj.Corriente.Valor);
 
             if (vj.Corriente.status === "OK")
-                 $("p.medida", panel).css({"background-color": "#cc0"});
+                 $("p.medida", panel).css({"background-color": "#cc0",
+                                            "color":"black" ,
+                                            "font-size":"2.0em",
+                                            "text-align":"center"});
+    
             else if (vj.Corriente.status === "NOK")
                  $("p.medida", panel).css({"background-color": "red"})
 
