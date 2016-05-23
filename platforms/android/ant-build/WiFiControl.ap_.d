@@ -28,6 +28,7 @@ D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\fonts\DSEG7Classic-BoldI
 D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\img\fondo_azul.jpg \
 D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\img\fondo_negro.jpg \
 D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\img\logo.png \
+D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\js\gauge.min.js \
 D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\js\index.js \
 D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\js\jquery-2.1.4.min.js \
 D:\DESARROLLOS\WiFiControl\platforms\android\assets\www\js\jquery-2.2.3.min.js \

@@ -274,26 +274,67 @@ var app = {
     onPanelResul: function (e, ui) {
 
         var panel = this;
-       
+
+        //***************
+        var gaugeAmp = new Gauge({
+            renderTo: 'gaugeAmp',
+            //width: 250,
+            //height: 250,
+            glow: true,
+            units: 'Amperios',
+            title: false,
+            minValue: 0,
+            maxValue: 20,
+            valueFormat: {int: 2, dec: 2},
+            majorTicks: ['0', '2', '4', '8', '12', '16', '20'],
+            minorTicks: 2,
+            strokeTicks: false,
+            highlights: [
+                {from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
+                {from: 2, to: 4, color: 'rgba(255, 255, 0, .15)'},
+                {from: 4, to: 8, color: 'rgba(255, 30,  0, .25)'},
+                {from: 8, to: 12, color: 'rgba(255, 0,  225, .25)'},
+                {from: 12, to: 16, color: 'rgba(0, 0,  255, .25)'},
+                {from: 16, to: 20, color: 'rgba(0, 0,  255, .25)'}
+            ],
+            colors: {
+                plate: '#222',
+                majorTicks: '#f5f5f5',
+                minorTicks: '#ddd',
+                title: '#fff',
+                units: '#ccc',
+                numbers: '#eee',
+                needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
+            }
+        });
+
+        //******************************************************
+
 
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
 
+        $.ajaxSetup({
+            timeout: 2000  //2 segundos
+
+        });
+
 
         $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
-            , function (vj) {
-            $("p.medida", panel).html("Corriente: " + vj.Corriente.Valor);
+                , function (vj) {
+                    $("p.medida", panel).html("Corriente: " + vj.Corriente.Valor);
 
-            if (vj.Corriente.status === "OK")
-                 $("p.medida", panel).css({"background-color": "#cc0",
-                                            "color":"black" ,
-                                            "font-size":"2.0em",
-                                            "text-align":"center"});
-    
-            else if (vj.Corriente.status === "NOK")
-                 $("p.medida", panel).css({"background-color": "red"})
+                    if (vj.Corriente.status === "OK")
+                        $("p.medida", panel).css({"background-color": "#cc0",
+                            "color": "black",
+                            "font-size": "2.0em",
+                            "text-align": "center"});
 
-            console.log("ff: " + vj.Corriente.Valor)
-               })
+                    else if (vj.Corriente.status === "NOK")
+                        $("p.medida", panel).css({"background-color": "red"})
+
+                    gaugeAmp.setValue(vj.Corriente.Valor);
+                    console.log("ff: " + vj.Corriente.Valor)
+                })
                 .error(function () {
 
                     navigator.notification.confirm(

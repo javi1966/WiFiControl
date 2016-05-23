@@ -44,9 +44,9 @@
 
                 <br/><br/><br/>
 
-                <button id="btnValorTension" class="ui-btn ui-shadow ui-btn-active">Dame Valor Tension</button>
-                <button id="btnValorCorriente" class="ui-btn ui-shadow ui-btn-active">Dame Valor Corriente</button>
-                <button id="btnValorPanel" class="ui-btn ui-shadow ui-btn-active">Dame Valor Panel</button>
+                <button id="btnValorTension" class="ui-btn ui-corner-all">Dame Valor Tension</button>
+                <button id="btnValorCorriente" class="ui-btn ui-corner-all">Dame Valor Corriente</button>
+                <button id="btnValorPanel" class="ui-btn  ui-corner-all">Dame Valor Panel</button>
                 <br/><br/><br/>
                 <div id = "valor" >
                     
@@ -66,11 +66,14 @@
             
             <div  data-role="panel" data-position="left" data-display="overlay" id="resulPanel">
                 <h1>Resultado</h1>    
-                <p class="medida">
-                </p>
+                <p class="medida"> </p>
+                              
+                <canvas id="gaugeAmp"></canvas>
+                
                 <p>
+                    
                 <a href="#" style="background-color:orange;margin:5% 15% 5% 15%;color:white;"
-                   data-rel="close"  class="ui-btn ui-shadow ui-corner-all">Cierra</a>
+                   data-rel="close"  class="ui-btn  ui-corner-all">Cierra</a>
                 </p>
                 
             </div> <!--Panel -->
@@ -83,6 +86,7 @@
             <h2 style="text-align:center;color:red;">Esta APP solo se ve en PORTRAIT</h2>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/gauge.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
