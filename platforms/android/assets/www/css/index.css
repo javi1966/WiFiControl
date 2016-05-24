@@ -51,7 +51,6 @@
 
     margin : 0px;
     padding: 0px;
-    
     position : absolute !important; 
     top : 0px !important;  
     right : 0px !important;  
@@ -63,60 +62,86 @@
       /*background-image: url("../img/fondo_negro.jpg") !important; */
 }
 
+ 
+ 
 
 
 
+.ui-btn.ui-btn-b{
+   background:linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important;
+   background:-webkit-linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important; 
+   border-radius: 1.0em !important;
+   margin:12% 1% 12% 1% !important;
+  /* box-shadow: 7px 7px 5px 0px  rgba(102,102,102,0.65) !important;*/
+}
 
+.ui-btn.ui-btn-b.ui-btn-down-b{
 
-
-button {
+   background:linear-gradient( #828282,#404040 ) repeat scroll 0 0 #828282 !important;
+   background:-webkit-linear-gradient( #828282,#404040 ) repeat scroll 0 0 #828282 !important; 
+}
+/*
+.ui-content ui-btn-active {
     box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
     border-radius: 1.0em !important;
     color : white !important;
-    background:linear-gradient( #404040,#828282 )  !important;
-    background:-webkit-linear-gradient( #404040,#828282 )  !important;
+    background:linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important;
+    background:-webkit-linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important;
     text-align: center !important;
     margin: .6em .6em .6em .6em;
 }
 
+.ui-content ui-btn-down {
+    background:#00ffff !important;
+    background:-webkit-linear-gradient( #828282,#404040 )  repeat scroll 0 0 #828282 !important;
+
+}
+
+*/
+
 #valor {
-    
-   
-    
+
     background-color:#cc0;
     color:black;
     font-size:2.0em;
     text-align: center;
-    
+
 }
 
 #resulPanel{
-   color:white; 
-   background:linear-gradient( #404040,#828282 )  ;
-   background:-webkit-linear-gradient( #404040,#828282 )  ;
-   
+    color:white; 
+    background:linear-gradient( #404040,#828282 )  ;
+    background:-webkit-linear-gradient( #404040,#828282 )  ;
+
 }
 
 #resulPanel h1{
-    
-    
+
+
     text-align: center;
     border-bottom-color:white  ; 
     border-bottom-width: 3px ;
-    
+
 }
+
+.ui-btn.ui-btn-c{
+   color:white !important; 
+   background:linear-gradient( #408080,#828282 ) repeat scroll 0 0 #404040 !important;
+   background:-webkit-linear-gradient( #408080,#828282 ) repeat scroll 0 0 #404040 !important; 
+   border-radius: 1.0em !important;
+   margin:5% 15% 5% 15% !important;
+  /* box-shadow: 7px 7px 5px 0px  rgba(102,102,102,0.65) !important;*/
+}
+
+
+
+
 
 #gaugeVolt {
 
-        width:50px;
-        height:50px;
-    }
-
-
-
-
-
-
+    width:50px;
+    height:50px;
+}
 
 
 #popupAbout{

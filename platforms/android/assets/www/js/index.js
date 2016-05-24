@@ -333,6 +333,7 @@ var app = {
                         $("p.medida", panel).css({"background-color": "red"})
 
                     gaugeAmp.setValue(vj.Corriente.Valor);
+                    
                     console.log("ff: " + vj.Corriente.Valor)
                 })
                 .error(function () {
