@@ -91,21 +91,22 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         toast("Iniciando...");
+        
+        $.ajaxSetup({
+            timeout: 2000  //2 segundos
+
+        });
 
         if (!window.navigator.onLine) {
-
-
             navigator.notification.confirm(
                     'Wifi no Encendido',
                     app.onWifiOn,
                     'Confirma Wifi',
                     ['OK']
                     );
-
-
-
-
-        }
+            }
+        
+        
 
         console.log('Received Event: ' + id);
     },
@@ -157,10 +158,7 @@ var app = {
                     'Confirma Wifi',
                     ['OK']
                     );
-
-
-
-        }
+          }
 
         toast("Salida De Pausa de APP");
 
@@ -170,7 +168,7 @@ var app = {
             "http://192.168.4.1/MonitorEnergia/corriente.json"]
 
         var id = $(this).attr('id');
-
+        
 
 
         //toast("Obteniendo valores");
@@ -179,12 +177,16 @@ var app = {
             case "btnValorTension":
 
                 $.getJSON(valHttp[0], function (vj) {
-                    $("#valor").html("Tension: " + vj.Tension.Valor);
-
+                    
+                    $(".medida_div").html("Tension:");
+                     
                     if (vj.Tension.status === "OK")
-                        $("#valor").css({"background-color": "#cc0"});
+                        $(".valor_div").html(vj.Tension.Valor).css({"color": "white"});
                     else if (vj.Tension.status === "NOK")
-                        $("#valor").css({"background-color": "red"})
+                        $(".valor_div").html(vj.Tension.Valor).css({"color": "red"})
+                    
+                     $(".magnitud_div").html("volt")
+                            .css({"text-decoration":"none"});
 
                     console.log("ff: " + vj.Tension.Valor)
 
@@ -201,18 +203,20 @@ var app = {
             case "btnValorCorriente":
 
                 $.getJSON(valHttp[1], function (vj) {
-                    $("#valor").html("Corriente: " + vj.Corriente.Valor);
+                    
+                    $(".medida_div").html("Corriente:"); 
 
                     if (vj.Corriente.status === "OK")
-                        $("#valor").css({"background-color": "#cc0"});
+                        $(".valor_div").html(vj.Corriente.Valor).css({"color": "white"});
                     else if (vj.Corriente.status === "NOK")
-                        $("#valor").css({"background-color": "red"})
+                        $(".valor_div").html(vj.Corriente.Valor).css({"color": "red"});
 
-
+                    $(".magnitud_div").html("amp")
+                            .css({"text-decoration":"none"});
 
                     console.log("ff: " + vj.Corriente.Valor)
                 })
-                        .error(function () {
+                .error(function () {
 
                             navigator.notification.confirm(
                                     'AP Hello_IoT no selec.',
@@ -225,21 +229,12 @@ var app = {
                 break;
 
             case "btnValorPanel":
-
-
-                $("#resulPanel").panel("open");
-
-
-
-
-                console.log("btnValorPanel");
+                  $("#resulPanel").panel("open");
+                  console.log("btnValorPanel");
                 break;
             default:
                 break;
         }
-
-
-
 
         /*
          $.ajax({url: val,
@@ -275,7 +270,7 @@ var app = {
 
         var panel = this;
 
-        //***************
+        //*******************************
         var gaugeAmp = new Gauge({
             renderTo: 'gaugeAmp',
             //width: 250,
@@ -309,29 +304,102 @@ var app = {
         });
 
         //******************************************************
-
-
+       var  gaugeVolt= new Gauge({
+        renderTo: 'gaugeVolt',
+        // width: 250,
+        // height: 250,
+        glow: true,
+        units: 'Voltios',
+        title: false,
+        minValue: 0,
+        maxValue: 240,
+        valueFormat: {int: 3, dec: 0},
+        majorTicks: ['0', '20', '40', '60', '80', '100', '120', '140', '160', '180', '200', '220', '240'],
+        minorTicks: 2,
+        strokeTicks: false,
+        highlights: [
+            {from: 0, to: 50, color: 'rgba(0,   255, 0, .15)'},
+            {from: 50, to: 100, color: 'rgba(255, 255, 0, .15)'},
+            {from: 100, to: 150, color: 'rgba(255, 30,  0, .25)'},
+            {from: 150, to: 200, color: 'rgba(255, 0,  225, .25)'},
+            {from: 200, to: 220, color: 'rgba(0, 0,  255, .25)'},
+            {from: 220, to: 240, color: 'rgba(0, 0,  255, .25)'}
+        ],
+        colors: {
+            plate: '#222',
+            majorTicks: '#f5f5f5',
+            minorTicks: '#ddd',
+            title: '#fff',
+            units: '#ccc',
+            numbers: '#eee',
+            needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
+        }
+    });
+        //******************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
-
-        $.ajaxSetup({
-            timeout: 2000  //2 segundos
-
-        });
-
-
-        $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
+        
+        $.getJSON("http://192.168.4.1/MonitorEnergia/voltaje.json"
                 , function (vj) {
-                    $("p.medida", panel).html("Corriente: " + vj.Corriente.Valor);
+                    
+                    /*
+                    $("p.medida", panel).html("Corriente: ").css({
+                        "font-size": "1.5em",
+                        });
+                            
 
                     if (vj.Corriente.status === "OK")
-                        $("p.medida", panel).css({"background-color": "#cc0",
-                            "color": "black",
+                        $("p.valor", panel).html(vj.Corriente.Valor).css({
+                            "background-color": "black",
+                            "color": "white",
+                            "font-family":"font7segmentos",
                             "font-size": "2.0em",
                             "text-align": "center"});
 
                     else if (vj.Corriente.status === "NOK")
-                        $("p.medida", panel).css({"background-color": "red"})
+                        $("p.medida", panel).css({
+                            "background-color": "black",
+                            "color": "red"});
+                    */
+                    gaugeVolt.setValue(vj.Tension.Valor);
+                    
+                    console.log("ff: " + vj.Tension.Valor)
+                })
+                .error(function () {
 
+                    navigator.notification.confirm(
+                            'AP Hello_IoT no selec.',
+                            app.onWifiOn,
+                            'Confirma Wifi',
+                            ['OK']
+                            );
+                });
+
+        
+        
+
+
+        $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
+                , function (vj) {
+                    
+                    /*
+                    $("p.medida", panel).html("Corriente: ").css({
+                        "font-size": "1.5em",
+                        });
+                            
+
+                    if (vj.Corriente.status === "OK")
+                        $("p.valor", panel).html(vj.Corriente.Valor).css({
+                            "background-color": "black",
+                            "color": "white",
+                            "font-family":"font7segmentos",
+                            "font-size": "2.0em",
+                            "text-align": "center"});
+
+                    else if (vj.Corriente.status === "NOK")
+                        $("p.medida", panel).css({
+                            "background-color": "black",
+                            "color": "red"});
+                    */
                     gaugeAmp.setValue(vj.Corriente.Valor);
                     
                     console.log("ff: " + vj.Corriente.Valor)
@@ -346,8 +414,7 @@ var app = {
                             );
                 });
 
-
-        //$("p.medida", panel).append(buf);
+        
         $(panel).trigger("updatelayout");
         console.log("onPanelResul");
     }

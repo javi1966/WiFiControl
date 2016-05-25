@@ -62,20 +62,15 @@
       /*background-image: url("../img/fondo_negro.jpg") !important; */
 }
 
- 
- 
-
-
-
 .ui-btn.ui-btn-b{
    background:linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important;
    background:-webkit-linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important; 
    border-radius: 1.0em !important;
-   margin:12% 1% 12% 1% !important;
-  /* box-shadow: 7px 7px 5px 0px  rgba(102,102,102,0.65) !important;*/
+   margin:12% 0% 12% 0% !important;
+   /*box-shadow: 0 0 5px 5px rgba(102,102,102,0.65) !important;*/
 }
 
-.ui-btn.ui-btn-b.ui-btn-down-b{
+.ui-btn.ui-btn-b.ui-btn-down{
 
    background:linear-gradient( #828282,#404040 ) repeat scroll 0 0 #828282 !important;
    background:-webkit-linear-gradient( #828282,#404040 ) repeat scroll 0 0 #828282 !important; 
@@ -100,49 +95,66 @@
 */
 
 #valor {
-
-    background-color:#cc0;
     color:black;
-    font-size:2.0em;
+    background-color:#cc0;
     text-align: center;
+    box-shadow: inset 0 0 5px 5px rgba(102,102,102,0.65) 
+}
 
+.medida_div{
+    
+    font-size:1.5em;
+    font-family:cursive;
+    text-decoration:underline;
+    text-align: left;
+   
+}
+
+.valor_div{
+   
+   font-size:2.9em;
+   font-family:font7segmentos; 
+   display:inline;
+}
+
+.magnitud_div{
+   font-family:cursive;
+   font-size:1.5em; 
+   display:inline; 
 }
 
 #resulPanel{
     color:white; 
-    background:linear-gradient( #404040,#828282 )  ;
-    background:-webkit-linear-gradient( #404040,#828282 )  ;
+    background:-webkit-linear-gradient( #404040,#828282 );
+    background:linear-gradient( #404040,#828282 ) ;
+    
 
 }
 
 #resulPanel h1{
 
 
-    text-align: center;
-    border-bottom-color:white  ; 
-    border-bottom-width: 3px ;
+    text-align: left;
+    text-decoration: underline;
 
 }
 
 .ui-btn.ui-btn-c{
    color:white !important; 
-   background:linear-gradient( #408080,#828282 ) repeat scroll 0 0 #404040 !important;
-   background:-webkit-linear-gradient( #408080,#828282 ) repeat scroll 0 0 #404040 !important; 
+   background:linear-gradient(#404040,#828282 ) repeat scroll 0 0 #404040 !important;
+   background:-webkit-linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important; 
    border-radius: 1.0em !important;
    margin:5% 15% 5% 15% !important;
   /* box-shadow: 7px 7px 5px 0px  rgba(102,102,102,0.65) !important;*/
 }
 
 
-
-
-
-#gaugeVolt {
-
-    width:50px;
-    height:50px;
+canvas {
+    
+    margin: 0% 5% 0% 6%;
+    width:180px;
+    
 }
-
 
 #popupAbout{
 
@@ -152,10 +164,6 @@
     box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
     width:10em;
 }
-
-
-
-
 
 #warning-message { display: none; }
 @media only screen and (orientation:landscape){
