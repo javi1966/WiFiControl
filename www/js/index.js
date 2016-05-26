@@ -208,8 +208,10 @@ var app = {
 
                     if (vj.Corriente.status === "OK")
                         $(".valor_div").html(vj.Corriente.Valor).css({"color": "white"});
+                            
                     else if (vj.Corriente.status === "NOK")
                         $(".valor_div").html(vj.Corriente.Valor).css({"color": "red"});
+                            
 
                     $(".magnitud_div").html("amp")
                             .css({"text-decoration":"none"});
@@ -335,31 +337,14 @@ var app = {
             needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
         }
     });
-        //******************************************
+   //****************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
         
         $.getJSON("http://192.168.4.1/MonitorEnergia/voltaje.json"
                 , function (vj) {
                     
-                    /*
-                    $("p.medida", panel).html("Corriente: ").css({
-                        "font-size": "1.5em",
-                        });
-                            
-
-                    if (vj.Corriente.status === "OK")
-                        $("p.valor", panel).html(vj.Corriente.Valor).css({
-                            "background-color": "black",
-                            "color": "white",
-                            "font-family":"font7segmentos",
-                            "font-size": "2.0em",
-                            "text-align": "center"});
-
-                    else if (vj.Corriente.status === "NOK")
-                        $("p.medida", panel).css({
-                            "background-color": "black",
-                            "color": "red"});
-                    */
+                  
+                    $("p.medida", panel).html("");
                     gaugeVolt.setValue(vj.Tension.Valor);
                     
                     console.log("ff: " + vj.Tension.Valor)
@@ -374,32 +359,9 @@ var app = {
                             );
                 });
 
-        
-        
-
-
         $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
                 , function (vj) {
-                    
-                    /*
-                    $("p.medida", panel).html("Corriente: ").css({
-                        "font-size": "1.5em",
-                        });
-                            
-
-                    if (vj.Corriente.status === "OK")
-                        $("p.valor", panel).html(vj.Corriente.Valor).css({
-                            "background-color": "black",
-                            "color": "white",
-                            "font-family":"font7segmentos",
-                            "font-size": "2.0em",
-                            "text-align": "center"});
-
-                    else if (vj.Corriente.status === "NOK")
-                        $("p.medida", panel).css({
-                            "background-color": "black",
-                            "color": "red"});
-                    */
+                  
                     gaugeAmp.setValue(vj.Corriente.Valor);
                     
                     console.log("ff: " + vj.Corriente.Valor)

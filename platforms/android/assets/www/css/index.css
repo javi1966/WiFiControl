@@ -96,29 +96,39 @@
 
 #valor {
     color:black;
-    background-color:#cc0;
+    background:linear-gradient(rgba(51,153,0,0.65),rgba(153,153,0,0.65));
     text-align: center;
-    box-shadow: inset 0 0 5px 5px rgba(102,102,102,0.65) 
+    -webkit-box-shadow:  -3px 2px  30px 4px lightblue; 
+    box-shadow:  -3px -3px  30px 4px lightblue; 
+    margin-left: 7px;    
+    margin-right :10px; 
+    border-radius: 10px;
+    
+   
 }
 
 .medida_div{
     
     font-size:1.5em;
-    font-family:cursive;
+    font-family:"Times New Roman", Times, serif;
+    font-weight:bold;
     text-decoration:underline;
-    text-align: left;
-   
+    text-align: center;
+    text-shadow: 3px 3px 5px gray;
 }
 
 .valor_div{
    
    font-size:2.9em;
-   font-family:font7segmentos; 
+   font-family:font7segmentos;
+   text-shadow: 3px 3px 3px gray;  
    display:inline;
 }
 
 .magnitud_div{
-   font-family:cursive;
+   font-family:"Times New Roman", Times, serif;
+   font-weight:bold;
+   text-shadow: 2px 2px 5px gray;
    font-size:1.5em; 
    display:inline; 
 }
@@ -127,7 +137,7 @@
     color:white; 
     background:-webkit-linear-gradient( #404040,#828282 );
     background:linear-gradient( #404040,#828282 ) ;
-    
+    box-shadow: 5px 0px 25px 5px gray;
 
 }
 
