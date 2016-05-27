@@ -112,23 +112,23 @@
     font-size:1.5em;
     font-family:"Times New Roman", Times, serif;
     font-weight:bold;
-    text-decoration:underline;
+   /* text-decoration:underline;*/
     text-align: center;
-    text-shadow: 3px 3px 5px gray;
+    text-shadow: 0px 0px 15px orange;
 }
 
 .valor_div{
    
    font-size:2.9em;
    font-family:font7segmentos;
-   text-shadow: 3px 3px 3px gray;  
+   text-shadow: 0px 0px 15px orange;
    display:inline;
 }
 
 .magnitud_div{
    font-family:"Times New Roman", Times, serif;
    font-weight:bold;
-   text-shadow: 2px 2px 5px gray;
+   text-shadow: 0px 0px 15px orange;
    font-size:1.5em; 
    display:inline; 
 }
@@ -138,14 +138,16 @@
     background:-webkit-linear-gradient( #404040,#828282 );
     background:linear-gradient( #404040,#828282 ) ;
     box-shadow: 5px 0px 25px 5px gray;
-
+    opacity: 0.90;
 }
 
 #resulPanel h1{
 
 
     text-align: left;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    text-shadow: 0px 0px 15px orange;
+        
 
 }
 
@@ -161,7 +163,7 @@
 
 canvas {
     
-    margin: 0% 5% 0% 6%;
+    margin: 0% 5% 0% 10%;
     width:180px;
     
 }
@@ -173,6 +175,7 @@ canvas {
     -ms-box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
     box-shadow: 10px 10px 5px 0px rgba(102,102,102,0.65);
     width:10em;
+    text-shadow: 0px 0px 15px orange;
 }
 
 #warning-message { display: none; }

@@ -138,7 +138,7 @@
     background:-webkit-linear-gradient( #404040,#828282 );
     background:linear-gradient( #404040,#828282 ) ;
     box-shadow: 5px 0px 25px 5px gray;
-
+    opacity: 0.90;
 }
 
 #resulPanel h1{
