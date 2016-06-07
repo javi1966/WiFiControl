@@ -51,16 +51,21 @@ var app = {
     wifi_conexion: window.navigator.connection || null,
     // Application Constructor
     initialize: function () {
+        
+        console.log("initialize: ");
         this.bindEvents();
 
-        console.log("initialize: ");
+        
     },
     // Bind Event Listeners
     //
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function () {
+        
+       
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        
         $(document).on('pageshow', '#main', this.onPageShow);
         /* refreshButton.ontouchstart = app.list;
          descButton.ontouchstart = app.disconnect;
@@ -80,23 +85,25 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function () {
-
+        console.log("onDeviceReady");
 
         app.receivedEvent('deviceready');
         $(document).bind("resume", app.onResumedApp);
-        $(document).bind("offline", app.onLineWiFi);
+        
         $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul)
-        console.log("onDeviceReady");
+        
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         toast("Iniciando...");
         
+        $(document).bind("offline",app.onLineWiFi);
+        
         $.ajaxSetup({
             timeout: 2000  //2 segundos
 
         });
-
+        /*
         if (!window.navigator.onLine) {
             navigator.notification.confirm(
                     'Wifi no Encendido',
@@ -105,6 +112,8 @@ var app = {
                     ['OK']
                     );
             }
+            
+           */
         
         
 
@@ -148,6 +157,8 @@ var app = {
     }
     ,
     onResumedApp: function () {
+        
+         console.log("OnResumedApp");
 
         if (!window.navigator.onLine) {
 
@@ -161,6 +172,8 @@ var app = {
           }
 
         toast("Salida De Pausa de APP");
+        
+       
 
     },
     dame_valor: function (e) {
