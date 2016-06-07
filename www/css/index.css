@@ -135,9 +135,9 @@
 
 #resulPanel{
     color:white; 
-    background:-webkit-linear-gradient( #404040,#828282 );
-    background:linear-gradient( #404040,#828282 ) ;
-    box-shadow: 5px 0px 25px 5px gray;
+    background:-webkit-linear-gradient( #0000cc,#000000 );
+    background:linear-gradient( #0000cc,#000000 ) ;
+    box-shadow: 5px 0px 20px 5px #0000c0;
     opacity: 0.90;
 }
 
