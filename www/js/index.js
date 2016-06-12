@@ -115,8 +115,6 @@ var app = {
             
            */
         
-        
-
         console.log('Received Event: ' + id);
     },
     onWifiOn: function (buttonIndex) {
