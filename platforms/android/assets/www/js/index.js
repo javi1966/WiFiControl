@@ -73,10 +73,11 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
+        btnCerrar.ontouchstart = app.cerrar;
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
         btnValorPanel.ontouchstart = app.dame_valor;
-        btnCerrar.ontouchstart = app.cerrar;
+        
         btnAbout.onclick = app.about;
         console.log("bindEvents:");
     },

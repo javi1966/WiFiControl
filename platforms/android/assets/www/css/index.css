@@ -29,9 +29,8 @@
 .ui-header-fixed {
 
     color:white !important;
-    font-family: cursive !important;
+    font-family: "Times New Roman", Times, serif !important; 
     font-size: 1em;
-    letter-spacing: 2px !important; 
     background-color: black!important;
     border-top-color:blue !important; 
     border-top-width: 3px !important;
