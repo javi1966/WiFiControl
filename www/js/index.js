@@ -176,8 +176,8 @@ var app = {
 
     },
     dame_valor: function (e) {
-        var valHttp = ["http://192.168.4.1/MonitorEnergia/voltaje.json",
-            "http://192.168.4.1/MonitorEnergia/corriente.json"]
+        var valHttp = ["http://192.168.1.50/MonitorEnergia/voltaje.json",
+            "http://192.168.1.50/MonitorEnergia/corriente.json"]
 
         var id = $(this).attr('id');
         
@@ -352,7 +352,7 @@ var app = {
    //****************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
         
-        $.getJSON("http://192.168.4.1/MonitorEnergia/voltaje.json"
+        $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json"
                 , function (vj) {
                     
                   
@@ -371,7 +371,7 @@ var app = {
                             );
                 });
 
-        $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
+        $.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json"
                 , function (vj) {
                   
                     gaugeAmp.setValue(vj.Corriente.Valor);
