@@ -53,6 +53,7 @@ var app = {
     initialize: function () {
         
         console.log("initialize: ");
+       
         this.bindEvents();
 
         
@@ -73,9 +74,10 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnCerrar.ontouchstart = app.cerrar;
+        btnCerrar.onclick = app.cerrar;
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
+        //btnValorCorriente.onclick = app.dame_valor;
         btnValorPanel.ontouchstart = app.dame_valor;
         
         btnAbout.onclick = app.about;
@@ -101,7 +103,7 @@ var app = {
         $(document).bind("offline",app.onLineWiFi);
         
         $.ajaxSetup({
-            timeout: 2000  //2 segundos
+            timeout: 20000  //2 segundos
 
         });
         /*
@@ -120,8 +122,9 @@ var app = {
     },
     onWifiOn: function (buttonIndex) {
         if (buttonIndex === 1) {
-            navigator.app.exitApp();
             console.log("onWifiOn");
+            navigator.app.exitApp();
+            
         }
     },
     onPageShow: function () {
@@ -130,6 +133,15 @@ var app = {
          $("#conectado").hide();
          $("#p_hora_alarma").hide();*/
     },
+    onConfirmExit: function (buttonIndex) {
+        navigator.notification.beep(1);
+        if (buttonIndex === 1) {
+            console.log("onConfirmExit");
+            navigator.app.exitApp();
+           
+        }
+    },
+    
     cerrar: function () {
 
         // navigator.app.exitApp();
@@ -141,15 +153,7 @@ var app = {
                 );
         console.log("Cerrar");
     },
-    onConfirmExit: function (buttonIndex) {
-        if (buttonIndex === 1) {
-
-            navigator.app.exitApp();
-            console.log("onConfirmExit");
-        }
-
-    }
-    ,
+    
     about: function () {
         $('#popupAbout').popup('open');
         console.log("about");
@@ -181,10 +185,8 @@ var app = {
 
         var id = $(this).attr('id');
         
-
-
         //toast("Obteniendo valores");
-
+         navigator.notification.beep(1);
         switch (id) {
             case "btnValorTension":
 
@@ -203,7 +205,7 @@ var app = {
                     console.log("ff: " + vj.Tension.Valor)
 
                 })
-                        .error(function () {
+                .error(function () {
                             navigator.notification.confirm(
                                     'AP Hello_IoT no selec.',
                                     app.onWifiOn,
@@ -354,7 +356,6 @@ var app = {
         
         $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json"
                 , function (vj) {
-                    
                   
                     $("p.medida", panel).html("");
                     gaugeVolt.setValue(vj.Tension.Valor);
