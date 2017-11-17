@@ -65,7 +65,7 @@
    background:linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important;
    background:-webkit-linear-gradient( #404040,#828282 ) repeat scroll 0 0 #404040 !important; 
    border-radius: 1.0em !important;
-   margin:12% 0% 12% 0% !important;
+   margin:10% 0% 10% 0% !important;
    /*box-shadow: 0 0 5px 5px rgba(102,102,102,0.65) !important;*/
 }
 
@@ -134,10 +134,10 @@
 
 #resulPanel{
     color:white; 
-    background:-webkit-linear-gradient( #0000cc,#000000 );
-    background:linear-gradient( #0000cc,#000000 ) ;
+    background:-webkit-linear-gradient( #0000bb,#000000 );
+    background:linear-gradient( #0000bb,#000000 ) ;
     box-shadow: 5px 0px 20px 5px #0000c0;
-    opacity: 0.90;
+    opacity: 0.95;
 }
 
 #resulPanel h1{
@@ -148,6 +148,15 @@
     text-shadow: 0px 0px 15px orange;
         
 
+}
+
+#fuentePanel{
+    color:yellow; 
+    background:-webkit-linear-gradient( #bb0000,#000000 );
+    background:linear-gradient( #bb0000,#000000 ) ;
+    box-shadow: 5px 0px 20px 5px #b00000;
+    opacity: 0.95;
+    
 }
 
 .ui-btn.ui-btn-c{
