@@ -38,6 +38,18 @@ var toast = function (msg) {
             });
 };
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+
+var bRele_1=false;
+var bRele_2=false;
 
 //********************************************************
 
@@ -79,7 +91,10 @@ var app = {
         btnValorCorriente.ontouchstart = app.dame_valor;
         //btnValorCorriente.onclick = app.dame_valor;
         btnValorPanel.ontouchstart = app.dame_valor;
-        
+        btnFuente.ontouchstart = app.controlFuente;
+        btnFuArriba.ontouchstart = app.pulso_rele;
+        btnFuAbajo.ontouchstart = app.pulso_rele;
+        btnFuOFF.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         console.log("bindEvents:");
     },
@@ -270,6 +285,73 @@ var app = {
 
     }
     ,
+    controlFuente:function () {
+                  $("#fuentePanel").panel("open");
+                  console.log("btnFuente");
+    },
+    pulso_rele: function (e) {
+      
+        var id = $(this).attr('id');
+        navigator.notification.beep(1);
+       
+        //toast("Pulsado Rele "+id);
+
+        switch (id) {
+            case "btnFuArriba":
+                
+                bRele_1=!bRele_1;
+                $.post(bRele_1?"http://192.168.1.45/rele1/on/"
+                              :"http://192.168.1.45/rele1/off/",
+                        function( data ) {
+                         toast("Pulsado "+data);
+                        });
+               
+                console.log("Rele 1: "+bRele_1);
+                break;
+                
+            case "btnFuAbajo":
+                
+                 bRele_2 = !bRele_2;
+               
+                $.post(bRele_2?"http://192.168.1.45/rele2/on/"
+                              :"http://192.168.1.45/rele2/off/",
+                        function( data ) {
+                         toast("Pulsado "+data);
+                        });
+               
+                console.log("Rele 2: "+bRele_2);
+                break;
+                
+            case "btnFuOFF":
+            
+                  $.post("http://192.168.1.45/rele1/off/",
+                             
+                        function( data ) {
+                        console.log("Rele 1 OFF ");
+                        });
+                        
+                  sleep(500);
+                  
+                  
+                  $.post("http://192.168.1.45/rele2/off/",
+                             
+                        function( data ) {
+                        console.log("Rele 2 OFF ");
+                        });      
+               
+                toast("Fuente OFF");
+                break;
+            
+               
+
+            default:
+                break;
+        }
+
+       
+        console.log("Pulsacion Reles");
+
+    },
     onLineWiFi: function () {
 
 
