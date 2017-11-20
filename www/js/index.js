@@ -468,8 +468,8 @@ var app = {
                 .error(function () {
 
                     navigator.notification.confirm(
-                            'AP Hello_IoT no selec.',
-                            app.onWifiOn,
+                            'Server OFF',
+                            app.onServerOFF,
                             'Confirma Wifi',
                             ['OK']
                             );
@@ -485,8 +485,8 @@ var app = {
                 .error(function () {
 
                     navigator.notification.confirm(
-                            'AP Hello_IoT no selec.',
-                            app.onWifiOn,
+                            'Server OFF',
+                             app.onServerOFF,
                             'Confirma Wifi',
                             ['OK']
                             );
