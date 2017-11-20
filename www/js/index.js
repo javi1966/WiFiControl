@@ -50,6 +50,7 @@ function sleep(milliseconds) {
 
 var bRele_1=false;
 var bRele_2=false;
+var bReleSonOff=false;
 
 //********************************************************
 
@@ -91,10 +92,11 @@ var app = {
         btnValorCorriente.ontouchstart = app.dame_valor;
         //btnValorCorriente.onclick = app.dame_valor;
         btnValorPanel.ontouchstart = app.dame_valor;
-        btnFuente.ontouchstart = app.controlFuente;
+        btnReles.ontouchstart = app.controlReles;
         btnFuArriba.ontouchstart = app.pulso_rele;
         btnFuAbajo.ontouchstart = app.pulso_rele;
         btnFuOFF.ontouchstart = app.pulso_rele;
+        btnsonoff.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         console.log("bindEvents:");
     },
@@ -139,6 +141,13 @@ var app = {
         if (buttonIndex === 1) {
             console.log("onWifiOn");
             navigator.app.exitApp();
+            
+        }
+    },
+    onServerOFF: function (buttonIndex) {
+        if (buttonIndex === 1) {
+            console.log("onServerOFF");
+            
             
         }
     },
@@ -222,8 +231,8 @@ var app = {
                 })
                 .error(function () {
                             navigator.notification.confirm(
-                                    'AP Hello_IoT no selec.',
-                                    app.onWifiOn,
+                                    'Server OFF',
+                                    app.onServerOFF,
                                     'Confirma Wifi',
                                     ['OK']
                                     );
@@ -250,8 +259,8 @@ var app = {
                 .error(function () {
 
                             navigator.notification.confirm(
-                                    'AP Hello_IoT no selec.',
-                                    app.onWifiOn,
+                                    'Server OFF',
+                                    app.onServerOFF,
                                     'Confirma Wifi',
                                     ['OK']
                                     );
@@ -285,7 +294,7 @@ var app = {
 
     }
     ,
-    controlFuente:function () {
+    controlReles:function () {
                   $("#fuentePanel").panel("open");
                   console.log("btnFuente");
     },
@@ -341,7 +350,19 @@ var app = {
                
                 toast("Fuente OFF");
                 break;
-            
+           case "btnsonoff":
+                
+                 bReleSonOff = !bReleSonOff;
+               
+                $.post(bReleSonOff?"http://192.168.1.46/rele1/on/"
+                              :"http://192.168.1.46/rele1/off/",
+                        function( data ) {
+                         toast("Pulsado "+ data);
+                         console.log("Rele SonOff: "+data);
+                        });
+               
+                console.log("Rele SonOff: "+bReleSonOff);
+                break; 
                
 
             default:
