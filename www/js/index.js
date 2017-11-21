@@ -213,10 +213,13 @@ var app = {
          navigator.notification.beep(1);
         switch (id) {
             case "btnValorTension":
-
-                $.getJSON(valHttp[0], function (vj) {
-                    
-                    $(".medida_div").html("Tension:");
+               
+                $.getJSON(valHttp[0])//, function () {
+                 
+                //})
+                .done (function (vj) {
+                   $.mobile.loader().hide();
+                   $(".medida_div").html("Tension:");
                      
                     if (vj.Tension.status === "OK")
                         $(".valor_div").html(vj.Tension.Valor).css({"color": "white"});
@@ -227,7 +230,10 @@ var app = {
                             .css({"text-decoration":"none"});
 
                     console.log("ff: " + vj.Tension.Valor)
-
+                })
+                
+                .always (function () {
+                   $.mobile.loader().show();
                 })
                 .error(function () {
                             navigator.notification.confirm(
@@ -237,11 +243,21 @@ var app = {
                                     ['OK']
                                     );
                         });
+               
                 break;
             case "btnValorCorriente":
 
-                $.getJSON(valHttp[1], function (vj) {
-                    
+                $.getJSON(valHttp[1])//, function (vj) {
+                 
+               .done(function(vj){
+                   
+                     $.mobile.loading("show", {
+                      text: "Conectando",
+                      textVisible: true,
+                      theme: "b",
+                      html: ""
+                      }); 
+            
                     $(".medida_div").html("Corriente:"); 
 
                     if (vj.Corriente.status === "OK")
@@ -255,6 +271,10 @@ var app = {
                             .css({"text-decoration":"none"});
 
                     console.log("ff: " + vj.Corriente.Valor)
+                })
+                .always(function(){
+                     $.mobile.loading("hide");
+                
                 })
                 .error(function () {
 
@@ -457,13 +477,16 @@ var app = {
    //****************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
         
-        $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json"
-                , function (vj) {
-                  
+        $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json")
+                //, function (vj) {
+               . done(function(vj){  
                     $("p.medida", panel).html("");
                     gaugeVolt.setValue(vj.Tension.Valor);
                     
                     console.log("ff: " + vj.Tension.Valor)
+                })
+                .always(function(){
+                    
                 })
                 .error(function () {
 
@@ -475,12 +498,15 @@ var app = {
                             );
                 });
 
-        $.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json"
-                , function (vj) {
-                  
+        $.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json")
+                //, function (vj) {
+                .done(function(vj){  
                     gaugeAmp.setValue(vj.Corriente.Valor);
                     
                     console.log("ff: " + vj.Corriente.Valor)
+                })
+                .always(function(){
+                            
                 })
                 .error(function () {
 
