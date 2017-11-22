@@ -47,7 +47,6 @@ function sleep(milliseconds) {
   }
 }
 
-
 var bRele_1=false;
 var bRele_2=false;
 var bReleSonOff=false;
@@ -213,12 +212,14 @@ var app = {
          navigator.notification.beep(1);
         switch (id) {
             case "btnValorTension":
+                
+                $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
                
                 $.getJSON(valHttp[0])//, function () {
                  
                 //})
                 .done (function (vj) {
-                   $.mobile.loader().hide();
+                   $.mobile.loading( "hide");
                    $(".medida_div").html("Tension:");
                      
                     if (vj.Tension.status === "OK")
@@ -232,9 +233,7 @@ var app = {
                     console.log("ff: " + vj.Tension.Valor)
                 })
                 
-                .always (function () {
-                   $.mobile.loader().show();
-                })
+                
                 .error(function () {
                             navigator.notification.confirm(
                                     'Server OFF',
@@ -246,17 +245,14 @@ var app = {
                
                 break;
             case "btnValorCorriente":
+                
+                $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
 
                 $.getJSON(valHttp[1])//, function (vj) {
                  
                .done(function(vj){
                    
-                     $.mobile.loading("show", {
-                      text: "Conectando",
-                      textVisible: true,
-                      theme: "b",
-                      html: ""
-                      }); 
+                     $.mobile.loading( 'hide');
             
                     $(".medida_div").html("Corriente:"); 
 
@@ -272,10 +268,7 @@ var app = {
 
                     console.log("ff: " + vj.Corriente.Valor)
                 })
-                .always(function(){
-                     $.mobile.loading("hide");
-                
-                })
+               
                 .error(function () {
 
                             navigator.notification.confirm(
@@ -420,12 +413,12 @@ var app = {
             minValue: 0,
             maxValue: 20,
             valueFormat: {int: 2, dec: 2},
-            majorTicks: ['0', '2', '4', '8', '12', '16', '20'],
+            majorTicks: ['0','4', '8', '12', '16', '20'],
             minorTicks: 2,
             strokeTicks: false,
             highlights: [
-                {from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
-                {from: 2, to: 4, color: 'rgba(255, 255, 0, .15)'},
+                //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
+                {from: 0, to: 4, color: 'rgba(255, 255, 0, .15)'},
                 {from: 4, to: 8, color: 'rgba(255, 30,  0, .25)'},
                 {from: 8, to: 12, color: 'rgba(255, 0,  225, .25)'},
                 {from: 12, to: 16, color: 'rgba(0, 0,  255, .25)'},
@@ -476,18 +469,17 @@ var app = {
     });
    //****************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
-        
+        $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
         $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json")
                 //, function (vj) {
-               . done(function(vj){  
+               . done(function(vj){ 
+                    $.mobile.loading( 'hide');
                     $("p.medida", panel).html("");
                     gaugeVolt.setValue(vj.Tension.Valor);
                     
                     console.log("ff: " + vj.Tension.Valor)
                 })
-                .always(function(){
-                    
-                })
+                
                 .error(function () {
 
                     navigator.notification.confirm(
@@ -497,17 +489,17 @@ var app = {
                             ['OK']
                             );
                 });
-
+        $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
         $.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json")
                 //, function (vj) {
-                .done(function(vj){  
+                .done(function(vj){
+                    
+                    $.mobile.loading( 'hide');
                     gaugeAmp.setValue(vj.Corriente.Valor);
                     
                     console.log("ff: " + vj.Corriente.Valor)
                 })
-                .always(function(){
-                            
-                })
+               
                 .error(function () {
 
                     navigator.notification.confirm(
