@@ -29,7 +29,7 @@ var toast = function (msg) {
                 "-webkit-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
                 "-moz-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
                 "-ms-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
-                "box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
+                "box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)"
             })
 
             .appendTo("body").delay(3000)
@@ -38,6 +38,18 @@ var toast = function (msg) {
             });
 };
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+var bRele_1=false;
+var bRele_2=false;
+var bReleSonOff=false;
 
 //********************************************************
 
@@ -53,6 +65,7 @@ var app = {
     initialize: function () {
         
         console.log("initialize: ");
+       
         this.bindEvents();
 
         
@@ -73,11 +86,16 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnCerrar.ontouchstart = app.cerrar;
+        btnCerrar.onclick = app.cerrar;
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
+        //btnValorCorriente.onclick = app.dame_valor;
         btnValorPanel.ontouchstart = app.dame_valor;
-        
+        btnReles.ontouchstart = app.controlReles;
+        btnFuArriba.ontouchstart = app.pulso_rele;
+        btnFuAbajo.ontouchstart = app.pulso_rele;
+        btnFuOFF.ontouchstart = app.pulso_rele;
+        btnsonoff.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         console.log("bindEvents:");
     },
@@ -91,7 +109,8 @@ var app = {
         app.receivedEvent('deviceready');
         $(document).bind("resume", app.onResumedApp);
         
-        $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul)
+        $(document).bind("panelbeforeopen", "#relesPanel", app.onRelePanel);
+        $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul);
         
     },
     // Update DOM on a Received Event
@@ -101,7 +120,7 @@ var app = {
         $(document).bind("offline",app.onLineWiFi);
         
         $.ajaxSetup({
-            timeout: 2000  //2 segundos
+            timeout: 20000  //2 segundos
 
         });
         /*
@@ -120,8 +139,16 @@ var app = {
     },
     onWifiOn: function (buttonIndex) {
         if (buttonIndex === 1) {
-            navigator.app.exitApp();
             console.log("onWifiOn");
+            navigator.app.exitApp();
+            
+        }
+    },
+    onServerOFF: function (buttonIndex) {
+        if (buttonIndex === 1) {
+            console.log("onServerOFF");
+            
+            
         }
     },
     onPageShow: function () {
@@ -130,6 +157,15 @@ var app = {
          $("#conectado").hide();
          $("#p_hora_alarma").hide();*/
     },
+    onConfirmExit: function (buttonIndex) {
+        navigator.notification.beep(1);
+        if (buttonIndex === 1) {
+            console.log("onConfirmExit");
+            navigator.app.exitApp();
+           
+        }
+    },
+    
     cerrar: function () {
 
         // navigator.app.exitApp();
@@ -141,15 +177,7 @@ var app = {
                 );
         console.log("Cerrar");
     },
-    onConfirmExit: function (buttonIndex) {
-        if (buttonIndex === 1) {
-
-            navigator.app.exitApp();
-            console.log("onConfirmExit");
-        }
-
-    }
-    ,
+    
     about: function () {
         $('#popupAbout').popup('open');
         console.log("about");
@@ -176,46 +204,57 @@ var app = {
 
     },
     dame_valor: function (e) {
-        var valHttp = ["http://192.168.4.1/MonitorEnergia/voltaje.json",
-            "http://192.168.4.1/MonitorEnergia/corriente.json"]
+        var valHttp = ["http://192.168.1.50/MonitorEnergia/voltaje.json",
+            "http://192.168.1.50/MonitorEnergia/corriente.json"];
 
         var id = $(this).attr('id');
         
-
-
         //toast("Obteniendo valores");
-
+        navigator.notification.beep(1);
         switch (id) {
             case "btnValorTension":
-
-                $.getJSON(valHttp[0], function (vj) {
-                    
-                    $(".medida_div").html("Tension:");
+                
+                $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
+               
+                $.getJSON(valHttp[0])//, function () {
+                 
+                //})
+                .done (function (vj) {
+                   $.mobile.loading( "hide");
+                   $(".medida_div").html("Tension:");
                      
                     if (vj.Tension.status === "OK")
                         $(".valor_div").html(vj.Tension.Valor).css({"color": "white"});
                     else if (vj.Tension.status === "NOK")
-                        $(".valor_div").html(vj.Tension.Valor).css({"color": "red"})
+                        $(".valor_div").html(vj.Tension.Valor).css({"color": "red"});
                     
                      $(".magnitud_div").html("volt")
                             .css({"text-decoration":"none"});
 
-                    console.log("ff: " + vj.Tension.Valor)
-
+                    console.log("ff: " + vj.Tension.Valor);
                 })
-                        .error(function () {
+                
+                
+                .error(function () {
                             navigator.notification.confirm(
-                                    'AP Hello_IoT no selec.',
-                                    app.onWifiOn,
+                                    'Server OFF',
+                                    app.onServerOFF,
                                     'Confirma Wifi',
                                     ['OK']
                                     );
                         });
+               
                 break;
             case "btnValorCorriente":
+                
+                $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
 
-                $.getJSON(valHttp[1], function (vj) {
-                    
+                $.getJSON(valHttp[1])//, function (vj) {
+                 
+               .done(function(vj){
+                   
+                     $.mobile.loading( 'hide');
+            
                     $(".medida_div").html("Corriente:"); 
 
                     if (vj.Corriente.status === "OK")
@@ -228,13 +267,14 @@ var app = {
                     $(".magnitud_div").html("amp")
                             .css({"text-decoration":"none"});
 
-                    console.log("ff: " + vj.Corriente.Valor)
+                    console.log("ff: " + vj.Corriente.Valor);
                 })
+               
                 .error(function () {
 
                             navigator.notification.confirm(
-                                    'AP Hello_IoT no selec.',
-                                    app.onWifiOn,
+                                    'Server OFF',
+                                    app.onServerOFF,
                                     'Confirma Wifi',
                                     ['OK']
                                     );
@@ -268,6 +308,90 @@ var app = {
 
     }
     ,
+    controlReles:function () {
+                  navigator.notification.beep(1);
+                  $("#relesPanel").panel("open");
+                  console.log("btnFuente");
+    },
+    onRelePanel: function (e, ui) {
+        
+        console.log("OnRelePanel");
+    },
+    pulso_rele: function (e) {
+      
+        var id = $(this).attr('id');
+        navigator.notification.beep(1);
+       
+        //toast("Pulsado Rele "+id);
+
+        switch (id) {
+            case "btnFuArriba":
+                
+                bRele_1=!bRele_1;
+                $.post(bRele_1?"http://192.168.1.45/rele1/on/"
+                              :"http://192.168.1.45/rele1/off/",
+                        function( data ) {
+                         toast("Pulsado "+data);
+                        });
+               
+                console.log("Rele 1: "+bRele_1);
+                break;
+                
+            case "btnFuAbajo":
+                
+                 bRele_2 = !bRele_2;
+               
+                $.post(bRele_2?"http://192.168.1.45/rele2/on/"
+                              :"http://192.168.1.45/rele2/off/",
+                        function( data ) {
+                         toast("Pulsado "+data);
+                        });
+               
+                console.log("Rele 2: "+bRele_2);
+                break;
+                
+            case "btnFuOFF":
+            
+                  $.post("http://192.168.1.45/rele1/off/",
+                             
+                        function( data ) {
+                        console.log("Rele 1 OFF ");
+                        });
+                        
+                  sleep(500);
+                  
+                  
+                  $.post("http://192.168.1.45/rele2/off/",
+                             
+                        function( data ) {
+                        console.log("Rele 2 OFF ");
+                        });      
+               
+                toast("Fuente OFF");
+                break;
+           case "btnsonoff":
+                
+                 bReleSonOff = !bReleSonOff;
+               
+                $.post(bReleSonOff?"http://192.168.1.46/rele1/on/"
+                              :"http://192.168.1.46/rele1/off/",
+                        function( data ) {
+                         toast("Pulsado "+ data);
+                         console.log("Rele SonOff: "+data);
+                        });
+               
+                console.log("Rele SonOff: "+bReleSonOff);
+                break; 
+               
+
+            default:
+                break;
+        }
+
+       
+      console.log("Pulsacion Reles");
+
+    },
     onLineWiFi: function () {
 
 
@@ -295,12 +419,12 @@ var app = {
             minValue: 0,
             maxValue: 20,
             valueFormat: {int: 2, dec: 2},
-            majorTicks: ['0', '2', '4', '8', '12', '16', '20'],
+            majorTicks: ['0','4', '8', '12', '16', '20'],
             minorTicks: 2,
             strokeTicks: false,
             highlights: [
-                {from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
-                {from: 2, to: 4, color: 'rgba(255, 255, 0, .15)'},
+                //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
+                {from: 0, to: 4, color: 'rgba(255, 255, 0, .15)'},
                 {from: 4, to: 8, color: 'rgba(255, 30,  0, .25)'},
                 {from: 8, to: 12, color: 'rgba(255, 0,  225, .25)'},
                 {from: 12, to: 16, color: 'rgba(0, 0,  255, .25)'},
@@ -349,40 +473,44 @@ var app = {
             needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
         }
     });
-   //****************************************************
+   //***************************************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
-        
-        $.getJSON("http://192.168.4.1/MonitorEnergia/voltaje.json"
-                , function (vj) {
-                    
-                  
+        $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
+        $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json")
+                //, function (vj) {
+               . done(function(vj){ 
+                    $.mobile.loading( 'hide');
                     $("p.medida", panel).html("");
                     gaugeVolt.setValue(vj.Tension.Valor);
                     
-                    console.log("ff: " + vj.Tension.Valor)
+                    console.log("ff: " + vj.Tension.Valor);
                 })
+                
                 .error(function () {
 
                     navigator.notification.confirm(
-                            'AP Hello_IoT no selec.',
-                            app.onWifiOn,
+                            'Server OFF',
+                            app.onServerOFF,
                             'Confirma Wifi',
                             ['OK']
                             );
                 });
-
-        $.getJSON("http://192.168.4.1/MonitorEnergia/corriente.json"
-                , function (vj) {
-                  
+        $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
+        $.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json")
+                //, function (vj) {
+                .done(function(vj){
+                    
+                    $.mobile.loading( 'hide');
                     gaugeAmp.setValue(vj.Corriente.Valor);
                     
-                    console.log("ff: " + vj.Corriente.Valor)
+                    console.log("ff: " + vj.Corriente.Valor);
                 })
+               
                 .error(function () {
 
                     navigator.notification.confirm(
-                            'AP Hello_IoT no selec.',
-                            app.onWifiOn,
+                            'Server OFF',
+                             app.onServerOFF,
                             'Confirma Wifi',
                             ['OK']
                             );

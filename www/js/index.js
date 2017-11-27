@@ -29,7 +29,7 @@ var toast = function (msg) {
                 "-webkit-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
                 "-moz-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
                 "-ms-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
-                "box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
+                "box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)"
             })
 
             .appendTo("body").delay(3000)
@@ -109,7 +109,8 @@ var app = {
         app.receivedEvent('deviceready');
         $(document).bind("resume", app.onResumedApp);
         
-        $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul)
+        $(document).bind("panelbeforeopen", "#relesPanel", app.onRelePanel);
+        $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul);
         
     },
     // Update DOM on a Received Event
@@ -204,12 +205,12 @@ var app = {
     },
     dame_valor: function (e) {
         var valHttp = ["http://192.168.1.50/MonitorEnergia/voltaje.json",
-            "http://192.168.1.50/MonitorEnergia/corriente.json"]
+            "http://192.168.1.50/MonitorEnergia/corriente.json"];
 
         var id = $(this).attr('id');
         
         //toast("Obteniendo valores");
-         navigator.notification.beep(1);
+        navigator.notification.beep(1);
         switch (id) {
             case "btnValorTension":
                 
@@ -225,12 +226,12 @@ var app = {
                     if (vj.Tension.status === "OK")
                         $(".valor_div").html(vj.Tension.Valor).css({"color": "white"});
                     else if (vj.Tension.status === "NOK")
-                        $(".valor_div").html(vj.Tension.Valor).css({"color": "red"})
+                        $(".valor_div").html(vj.Tension.Valor).css({"color": "red"});
                     
                      $(".magnitud_div").html("volt")
                             .css({"text-decoration":"none"});
 
-                    console.log("ff: " + vj.Tension.Valor)
+                    console.log("ff: " + vj.Tension.Valor);
                 })
                 
                 
@@ -266,7 +267,7 @@ var app = {
                     $(".magnitud_div").html("amp")
                             .css({"text-decoration":"none"});
 
-                    console.log("ff: " + vj.Corriente.Valor)
+                    console.log("ff: " + vj.Corriente.Valor);
                 })
                
                 .error(function () {
@@ -308,8 +309,13 @@ var app = {
     }
     ,
     controlReles:function () {
-                  $("#fuentePanel").panel("open");
+                  navigator.notification.beep(1);
+                  $("#relesPanel").panel("open");
                   console.log("btnFuente");
+    },
+    onRelePanel: function (e, ui) {
+        
+        console.log("OnRelePanel");
     },
     pulso_rele: function (e) {
       
@@ -383,7 +389,7 @@ var app = {
         }
 
        
-        console.log("Pulsacion Reles");
+      console.log("Pulsacion Reles");
 
     },
     onLineWiFi: function () {
@@ -467,7 +473,7 @@ var app = {
             needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
         }
     });
-   //****************************************************
+   //***************************************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
         $.mobile.loading( 'show', { theme: "a", text: "Conectando", textonly: false});
         $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json")
@@ -477,7 +483,7 @@ var app = {
                     $("p.medida", panel).html("");
                     gaugeVolt.setValue(vj.Tension.Valor);
                     
-                    console.log("ff: " + vj.Tension.Valor)
+                    console.log("ff: " + vj.Tension.Valor);
                 })
                 
                 .error(function () {
@@ -497,7 +503,7 @@ var app = {
                     $.mobile.loading( 'hide');
                     gaugeAmp.setValue(vj.Corriente.Valor);
                     
-                    console.log("ff: " + vj.Corriente.Valor)
+                    console.log("ff: " + vj.Corriente.Valor);
                 })
                
                 .error(function () {

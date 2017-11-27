@@ -19,7 +19,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/>
+       <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/> -->
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">
         <script  src="js/jquery-2.1.4.min.js"></script>
         <script  src="js/jquery.mobile-1.4.5.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css"/>
@@ -46,7 +47,8 @@
 
                 <button id="btnValorTension"  class="ui-btn ui-btn-b ui-corner-all ui-shadow">Dame Valor Tension</button>
                 <button id="btnValorCorriente" class="ui-btn ui-btn-b ui-corner-all ui-shadow" >Dame Valor Corriente</button>
-                <button id="btnValorPanel" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Dame Valor Panel</button>
+                <button id="btnValorPanel" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Dame Valor Panel Electrico</button>
+                <button id="btnReles" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Control Reles</button>
                 
                 <div id = "valor"  >
                     <p class="medida_div"> </p>
@@ -72,15 +74,28 @@
             <div  data-role="panel" data-position="left" data-display="overlay" id="resulPanel">
                 <h1>Resultado</h1> 
                 <p class="medida"> </p>
-                
-                
                
-                
                 <canvas id="gaugeVolt"></canvas>
                               
                 <canvas id="gaugeAmp"></canvas>
                 
                 
+                <p>
+                    
+                <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
+                   
+                </p>
+                
+            </div> <!--Panel -->
+            
+            <div  data-role="panel" data-position="right" data-display="overlay" id="relesPanel">
+                <h1>Reles</h1> 
+                
+                  <a href="#"  id="btnFuArriba" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fu. Arriba</a>
+                  <a href="#"  id="btnFuAbajo" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fu. Abajo</a>
+                  <a href="#"  id="btnFuOFF" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fuente OFF</a> 
+                  <a href="#"  id="btnsonoff" class="ui-btn ui-btn-c ui-corner-all ui-shadow">SonOff</a>            
+                  <br/><br/><br/><br/><br/><br/>
                 <p>
                     
                 <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
