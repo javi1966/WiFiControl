@@ -86,7 +86,7 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnCerrar.onclick = app.cerrar;
+        btnCerrar.ontouchstart = app.cerrar;
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
         //btnValorCorriente.onclick = app.dame_valor;
@@ -158,6 +158,7 @@ var app = {
          $("#p_hora_alarma").hide();*/
     },
     onConfirmExit: function (buttonIndex) {
+        
         navigator.notification.beep(1);
         if (buttonIndex === 1) {
             console.log("onConfirmExit");

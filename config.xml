@@ -9,4 +9,14 @@
     </author>
     <content src="index.html"/>
     <access origin="*"/>
+    
+    
+    <preference name="Fullscreen" value="true" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="23" />
+    <preference name="android-maxSdkVersion" value="24" />
+    
+    
+    
 </widget>
+
