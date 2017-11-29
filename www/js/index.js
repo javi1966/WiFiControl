@@ -226,9 +226,9 @@ var app = {
 
                             console.log("Tension: " + data.field2);
 
-                            $(".medida_div").html("Tension:");
+                            //$(".medida_div").html("Tension:");
                             $(".valor_div").html(data.field2).css({"color": "white"});
-                            $(".magnitud_div").html("volt")
+                            $(".magnitud_div").html("Volt.")
                                     .css({"text-decoration": "none"});
 
                         })
@@ -276,9 +276,9 @@ var app = {
 
                             console.log("Corriente: " + data.field1);
 
-                            $(".medida_div").html("Corriente:");
+                           // $(".medida_div").html("Corriente:");
                             $(".valor_div").html(data.field1).css({"color": "white"});
-                            $(".magnitud_div").html("Amp")
+                            $(".magnitud_div").html("Amp.")
                                     .css({"text-decoration": "none"});
 
                         })
