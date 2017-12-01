@@ -51,7 +51,7 @@ var bRele_1 = false;
 var bRele_2 = false;
 var bReleSonOff = false;
 
-//********************************************************
+//****************************************************************************
 
 
 var app = {
@@ -513,19 +513,21 @@ var app = {
         //***************************************************************************
         $("p.medida", panel).html("<i>Midiendo - espere...!</i>");
         $.mobile.loading('show', {theme: "a", text: "Conectando", textonly: false});
-        $.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json")
+        //$.getJSON("http://192.168.1.50/MonitorEnergia/voltaje.json")
+        
+        $.getJSON('http://api.thingspeak.com/channels/267256/feeds/last.json?api_key=0C2M9I6C2LOH21AI')
                 //, function (vj) {
-                .done(function (vj) {
+                .done(function (data) {
                     $.mobile.loading('hide');
                     $("p.medida", panel).html("");
-                    gaugeVolt.setValue(vj.Tension.Valor);
-
-                    console.log("ff: " + vj.Tension.Valor);
+                   // gaugeVolt.setValue(vj.Tension.Valor);
+                    gaugeVolt.setValue(data.field2);
+                    console.log("Tension: " + data.field2);
                 })
 
                 .error(function () {
                      $.mobile.loading("hide");
-                    navigator.notification.confirm(
+                      navigator.notification.confirm(
                             'Server OFF',
                             app.onServerOFF,
                             'Confirma Wifi',
@@ -533,14 +535,15 @@ var app = {
                             );
                 });
         $.mobile.loading('show', {theme: "a", text: "Conectando", textonly: false});
-        $.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json")
+        //$.getJSON("http://192.168.1.50/MonitorEnergia/corriente.json")
+        $.getJSON('http://api.thingspeak.com/channels/267256/feeds/last.json?api_key=0C2M9I6C2LOH21AI')
                 //, function (vj) {
-                .done(function (vj) {
+                .done(function (data) {
 
                     $.mobile.loading('hide');
-                    gaugeAmp.setValue(vj.Corriente.Valor);
-
-                    console.log("ff: " + vj.Corriente.Valor);
+                    //gaugeAmp.setValue(vj.Corriente.Valor);
+                    gaugeAmp.setValue(data.field1);
+                    console.log("Corriente: " + data.field1);
                 })
 
                 .error(function () {

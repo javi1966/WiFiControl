@@ -25,6 +25,7 @@
 
 .ui-body-e {
     background-color:#fbef7e !important;
+    
 }
 .ui-header-fixed {
 
@@ -56,9 +57,9 @@
     bottom : 0px !important;  
     left : 0px !important; 
     color: white !important;
-    background-color: black !important;
-    /*  display: inline !important; 
-      /*background-image: url("../img/fondo_negro.jpg") !important; */
+   /* background-color: black !important;*/
+    /*  display: inline !important;*/ 
+    background-image: url("../img/fondo_negro.jpg") !important; 
 }
 
 .ui-btn.ui-btn-b{
