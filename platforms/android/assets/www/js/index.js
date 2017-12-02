@@ -97,6 +97,7 @@ var app = {
         btnFuOFF.ontouchstart = app.pulso_rele;
         btnsonoff.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
+        btnMeteo.ontouchstart=app.verClima;
         console.log("bindEvents:");
     },
     // deviceready Event Handler
@@ -111,6 +112,7 @@ var app = {
 
         $(document).bind("panelbeforeopen", "#relesPanel", app.onRelePanel);
         $(document).bind("panelbeforeopen", "#resulPanel", app.onPanelResul);
+        $(document).bind("panelbeforeopen", "#panelClima", app.onResClimaPanel);
 
     },
     // Update DOM on a Received Event
@@ -559,6 +561,155 @@ var app = {
 
         $(panel).trigger("updatelayout");
         console.log("onPanelResul");
+    },
+    verClima: function () {
+        
+      navigator.notification.beep(1);
+      $("#panelClima").panel("open");  
+        
+      console.log("verClima");   
+    },
+    onResClimaPanel: function (e,ui) {
+        
+       var panelCli = this; 
+        
+         //************** Temperatura ******
+        var gaugeTemp = new Gauge({
+            renderTo: 'gaugeTemp',
+            //width: 250,
+            //height: 250,
+            glow: true,
+            units: 'ºC',
+            title: false,
+            minValue: 0,
+            maxValue: 60,
+            valueFormat: {int: 2, dec: 1},
+            majorTicks: ['0', '10', '20', '30', '40', '50' ,'60'],
+            minorTicks: 2,
+            strokeTicks: false,
+            highlights: [
+                //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
+                {from: 0, to: 10, color: 'rgba(0, 0, 255, .15)'},
+                {from: 10, to: 20, color: 'rgba(0, 0, 255, .25)'},
+                {from: 20, to: 30, color: 'rgba(255, 0,225, .25)'},
+                {from: 30, to: 40, color: 'rgba(255, 0,  0, .25)'},
+                {from: 40, to: 50, color: 'rgba(255, 0,  0, .25)'},
+                {from: 50, to: 60, color: 'rgba(255, 0,  0, .25)'}
+            ],
+            colors: {
+                plate: '#222',
+                majorTicks: '#f5f5f5',
+                minorTicks: '#ddd',
+                title: '#fff',
+                units: '#ccc',
+                numbers: '#eee',
+                needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
+            }
+        });
+        
+        //******************* Humedad ***************************
+        
+        var gaugeHumedad = new Gauge({
+            renderTo: 'gaugeHumedad',
+            //width: 250,
+            //height: 250,
+            glow: true,
+            units: '%Hr',
+            title: false,
+            minValue: 0,
+            maxValue: 100,
+            valueFormat: {int: 2, dec: 1},
+            majorTicks: ['0', '20', '40', '60', '80', '100'],
+            minorTicks: 2,
+            strokeTicks: false,
+            highlights: [
+                //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
+                {from: 0, to: 20, color: 'rgba(0, 0, 255, .15)'},
+                {from: 20, to: 40, color: 'rgba(255, 30,  0, .25)'},
+                {from: 40, to: 60, color: 'rgba(255, 0,  225, .25)'},
+                {from: 60, to: 80, color: 'rgba(255, 0,  255, .25)'},
+                {from: 80, to: 100, color: 'rgba(255, 0,  255, .25)'}
+                
+            ],
+            colors: {
+                plate: '#222',
+                majorTicks: '#f5f5f5',
+                minorTicks: '#ddd',
+                title: '#fff',
+                units: '#ccc',
+                numbers: '#eee',
+                needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
+            }
+        });
+        
+        //******************* Presion Atmosferica ***************************
+        
+        var gaugePresion = new Gauge({
+            renderTo: 'gaugePresion',
+            //width: 250,
+            //height: 250,
+            glow: true,
+            units: 'Kpa',
+            title: false,
+            minValue: 80,
+            maxValue: 120,
+            valueFormat: {int: 3, dec: 1},
+            majorTicks: ['80', '85', '90', '95','100','120'],
+            minorTicks: 2,
+            strokeTicks: false,
+            highlights: [
+                //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
+                {from: 80, to: 85, color: 'rgba(0, 0, 255, .15)'},
+                {from: 85, to: 90, color: 'rgba(0, 0,  255, .25)'},
+                {from: 90, to: 95, color: 'rgba(0, 0,  225, .25)'},
+                {from: 95, to: 100, color: 'rgba(0, 0,  225, .25)'},
+                {from: 100, to: 120, color: 'rgba(255, 0, 0, .25)'}
+                
+                
+            ],
+            colors: {
+                plate: '#222',
+                majorTicks: '#f5f5f5',
+                minorTicks: '#ddd',
+                title: '#fff',
+                units: '#ccc',
+                numbers: '#eee',
+                needle: {start: 'rgba(240, 128, 128, 1)', end: 'rgba(255, 160, 122, .9)'}
+            }
+        });
+        
+       $("p.medida", panelCli).html("<i>Midiendo - espere...!</i>"); 
+        
+       $.mobile.loading('show', {theme: "a", text: "Conectando", textonly: false});
+      
+       $.getJSON('http://api.thingspeak.com/channels/172131/feeds/last.json?api_key=SQ0AWSJRWFJ8Z7O1')
+                //, function (vj) {
+                .done(function (data) {
+                    $.mobile.loading('hide');
+                    $("p.medida", panelCli).html("");
+                   
+                    gaugeTemp.setValue(data.field1);
+                    gaugeHumedad.setValue(data.field2);
+                    gaugePresion.setValue(data.field3/1000);
+                    console.log("Temperatura: " + data.field1);
+                    console.log("Humedad: " + data.field2);
+                    console.log("Presion: " + data.field3);
+                })
+
+                .error(function () {
+                     $.mobile.loading("hide");
+                      navigator.notification.confirm(
+                            'Server OFF',
+                            app.onServerOFF,
+                            'Confirma Wifi',
+                            ['OK']
+                            );
+                });  
+        
+        
+        
+      $(panelCli).trigger("updatelayout");  
+      console.log("onResClimaPanel");  
     }
 
 

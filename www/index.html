@@ -49,6 +49,7 @@
                 <button id="btnValorCorriente" class="ui-btn ui-btn-b ui-corner-all ui-shadow" >Dame Valor Corriente</button>
                 <button id="btnValorPanel" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Dame Valor Panel Electrico</button>
                 <button id="btnReles" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Control Reles</button>
+                <button id="btnMeteo" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Clima</button>
                 
                 <div id = "valor"  >
                     <p class="medida_div"> </p>
@@ -96,6 +97,28 @@
                   <a href="#"  id="btnFuOFF" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fuente OFF</a> 
                   <a href="#"  id="btnsonoff" class="ui-btn ui-btn-c ui-corner-all ui-shadow">SonOff</a>            
                   <br/><br/><br/><br/><br/><br/>
+                <p>
+                    
+                <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
+                   
+                </p>
+                
+            </div> <!--Panel -->
+            
+            <div  data-role="panel" data-position="left" data-display="overlay" id="panelClima">
+                <h1>Clima</h1> 
+                
+                <p class="medida"> </p>
+               
+                <canvas id="gaugeTemp"></canvas>
+                              
+                <canvas id="gaugeHumedad"></canvas>
+                
+                <canvas id="gaugePresion"></canvas>
+                
+                
+                  
+                  
                 <p>
                     
                 <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>

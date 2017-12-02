@@ -161,6 +161,15 @@
     
 }
 
+#panelClima{
+    color:whitesmoke; 
+    background:-webkit-linear-gradient( #00bb00,#000000 );
+    background:linear-gradient( #00bb00,#000000 ) ;
+    box-shadow: 5px 0px 20px 5px #00b000;
+    opacity: 0.95;
+    
+}
+
 .ui-btn.ui-btn-c{
    color:white !important; 
    background:linear-gradient(#404040,#828282 ) repeat scroll 0 0 #404040 !important;
