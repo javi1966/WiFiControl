@@ -229,7 +229,7 @@ var app = {
                             console.log("Tension: " + data.field2);
 
                             //$(".medida_div").html("Tension:");
-                            $(".valor_div").html(data.field2).css({"color": "white"});
+                            $(".valor_div").html(data.field2);//.css({"color": "white"});
                             $(".magnitud_div").html("Volt.")
                                     .css({"text-decoration": "none"});
 
@@ -370,12 +370,18 @@ var app = {
 
                 bRele_1 = !bRele_1;
                 $.post(bRele_1 ? "http://192.168.1.45/rele1/on/"
-                        : "http://192.168.1.45/rele1/off/",
-                        function (data) {
-                            toast("Pulsado " + data);
-                        });
+                        : "http://192.168.1.45/rele1/off/")
+                       .done(function (data) {
+                       // function (data,status) {
+                            toast("Pulsado: " + data);
+                            console.log("Rele 1: " + data);
+                        })
+                        .fail(function(error) {
+                               alert("Error: "+error.responseText);
+                         });
 
-                console.log("Rele 1: " + bRele_1);
+
+                
                 break;
 
             case "btnFuAbajo":
@@ -383,41 +389,63 @@ var app = {
                 bRele_2 = !bRele_2;
 
                 $.post(bRele_2 ? "http://192.168.1.45/rele2/on/"
-                        : "http://192.168.1.45/rele2/off/",
-                        function (data) {
-                            toast("Pulsado " + data);
-                        });
+                        : "http://192.168.1.45/rele2/off/")
+                        
+                        .done(function (data) {
+                       // function (data,status) {
+                            toast("Pulsado: " + data);
+                            console.log("Rele 2: " + data);
+                        })
+                        .fail(function(error) {
+                               alert("Error: "+error.responseText);
+                         });
 
-                console.log("Rele 2: " + bRele_2);
+               
                 break;
 
             case "btnFuOFF":
 
-                $.post("http://192.168.1.45/rele1/off/",
-                        function (data) {
-                            console.log("Rele 1 OFF ");
-                        });
+                $.post("http://192.168.1.45/rele1/off/")
+                        .done(function (data){
+                       // function (data,status) {
+                            toast("Fuente OFF");
+                            console.log("Fuente Off: " + data);
+                        })
+                        .fail(function(error) {
+                                alert("Error: "+error.responseText);
+                         });
 
                 sleep(500);
 
 
-                $.post("http://192.168.1.45/rele2/off/",
-                        function (data) {
-                            console.log("Rele 2 OFF ");
-                        });
+                $.post("http://192.168.1.45/rele2/off/")
+                         .done(function (data){
+                       // function (data,status) {
+                            //toast("Pulsado: " + data + "\nStatus: " + status);
+                            toast("Fuente OFF");
+                            console.log("Fuente Off: " + data);
+                        })
+                        .fail(function(error) {
+                                alert("Error: "+error.responseText);
+                         });
 
-                toast("Fuente OFF");
+                
                 break;
             case "btnsonoff":
 
                 bReleSonOff = !bReleSonOff;
 
                 $.post(bReleSonOff ? "http://192.168.1.46/rele1/on/"
-                        : "http://192.168.1.46/rele1/off/",
-                        function (data) {
-                            toast("Pulsado " + data);
+                        : "http://192.168.1.46/rele1/off/")
+                        
+                        .done(function (data){
+                       // function (data,status) {
+                            toast("Pulsado: " + data + "\nStatus: " + status);
                             console.log("Rele SonOff: " + data);
-                        });
+                        })
+                        .fail(function(error) {
+                                alert("Error: "+error.responseText);
+                         });
 
                 console.log("Rele SonOff: " + bReleSonOff);
                 break;
