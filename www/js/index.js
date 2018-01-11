@@ -50,6 +50,7 @@ function sleep(milliseconds) {
 var bRele_1 = false;
 var bRele_2 = false;
 var bReleSonOff = false;
+var bFocoFuente = false;
 
 //****************************************************************************
 
@@ -96,6 +97,7 @@ var app = {
         btnFuAbajo.ontouchstart = app.pulso_rele;
         btnFuOFF.ontouchstart = app.pulso_rele;
         btnsonoff.ontouchstart = app.pulso_rele;
+        btnFocoFuente.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
         console.log("bindEvents:");
@@ -449,7 +451,24 @@ var app = {
 
                 console.log("Rele SonOff: " + bReleSonOff);
                 break;
+            case "btnFocoFuente":
 
+                bFocoFuente = !bFocoFuente;
+
+                $.post(bFocoFuente ? "http://192.168.1.48/rele1/on/"
+                        : "http://192.168.1.48/rele1/off/")
+                        
+                        .done(function (data){
+                       // function (data,status) {
+                            toast("Pulsado: " + data + "\nStatus: " + status);
+                            console.log("Rele Foco Fuente: " + data);
+                        })
+                        .fail(function(error) {
+                                alert("Error: "+error.responseText);
+                         });
+
+                console.log("Rele SonOff: " + bFocoFuente);
+                break;
 
             default:
                 break;
@@ -679,19 +698,20 @@ var app = {
             glow: true,
             units: 'Kpa',
             title: false,
-            minValue: 80,
-            maxValue: 120,
+            minValue: 90,
+            maxValue: 115,
             valueFormat: {int: 3, dec: 1},
-            majorTicks: ['80', '85', '90', '95','100','120'],
+            majorTicks: ['90', '95', '100', '105','110','115'],
             minorTicks: 2,
             strokeTicks: false,
             highlights: [
                 //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
-                {from: 80, to: 85, color: 'rgba(0, 0, 255, .15)'},
-                {from: 85, to: 90, color: 'rgba(0, 0,  255, .25)'},
-                {from: 90, to: 95, color: 'rgba(0, 0,  225, .25)'},
-                {from: 95, to: 100, color: 'rgba(0, 0,  225, .25)'},
-                {from: 100, to: 120, color: 'rgba(255, 0, 0, .25)'}
+                {from: 90, to: 95, color: 'rgba(0, 0,  255, .25)'},
+                {from: 95, to: 100, color: 'rgba(0, 0,  255, .25)'},
+                {from: 100, to: 105, color: 'rgba(0, 255,  0, .25)'},
+                {from: 105, to: 110, color: 'rgba(0, 255,  0, .25)'},
+                {from: 110, to: 115, color: 'rgba(255, 0,  0, .25)'}
+               
                 
                 
             ],
