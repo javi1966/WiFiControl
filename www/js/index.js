@@ -696,21 +696,21 @@ var app = {
             //width: 250,
             //height: 250,
             glow: true,
-            units: 'Kpa',
+            units: 'mb',
             title: false,
-            minValue: 90,
-            maxValue: 115,
-            valueFormat: {int: 3, dec: 1},
-            majorTicks: ['90', '95', '100', '105','110','115'],
+            minValue: 900,
+            maxValue: 1150,
+            valueFormat: {int: 4,dec:0},
+            majorTicks: ['900', '950', '1000', '1050','1100','1150'],
             minorTicks: 2,
             strokeTicks: false,
             highlights: [
                 //{from: 0, to: 2, color: 'rgba(0,   255, 0, .15)'},
-                {from: 90, to: 95, color: 'rgba(0, 0,  255, .25)'},
-                {from: 95, to: 100, color: 'rgba(0, 0,  255, .25)'},
-                {from: 100, to: 105, color: 'rgba(0, 255,  0, .25)'},
-                {from: 105, to: 110, color: 'rgba(0, 255,  0, .25)'},
-                {from: 110, to: 115, color: 'rgba(255, 0,  0, .25)'}
+                {from: 900, to: 950, color: 'rgba(0, 0,  255, .25)'},
+                {from: 950, to: 1000, color: 'rgba(0, 0,  255, .25)'},
+                {from: 1000, to: 1050, color: 'rgba(0, 255,  0, .25)'},
+                {from: 1050, to: 1100, color: 'rgba(0, 255,  0, .25)'},
+                {from: 1100, to: 1150 , color: 'rgba(255, 0,  0, .25)'}
                
                 
                 
@@ -738,7 +738,7 @@ var app = {
                    
                     gaugeTemp.setValue(data.field1);
                     gaugeHumedad.setValue(data.field2);
-                    gaugePresion.setValue(data.field3/1000);
+                    gaugePresion.setValue(data.field3/100);
                     console.log("Temperatura: " + data.field1);
                     console.log("Humedad: " + data.field2);
                     console.log("Presion: " + data.field3);
