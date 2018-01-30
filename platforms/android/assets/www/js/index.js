@@ -100,6 +100,7 @@ var app = {
         btnFocoFuente.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
+        btnGraf.onclick=app.verGraficas;
         console.log("bindEvents:");
     },
     // deviceready Event Handler
@@ -710,7 +711,7 @@ var app = {
                 {from: 950, to: 1000, color: 'rgba(0, 0,  255, .25)'},
                 {from: 1000, to: 1050, color: 'rgba(0, 255,  0, .25)'},
                 {from: 1050, to: 1100, color: 'rgba(0, 255,  0, .25)'},
-                {from: 1100, to: 1150, color: 'rgba(255, 0,  0, .25)'}
+                {from: 1100, to: 1150 , color: 'rgba(255, 0,  0, .25)'}
                
                 
                 
@@ -758,7 +759,14 @@ var app = {
         
       $(panelCli).trigger("updatelayout");  
       console.log("onResClimaPanel");  
-    }
-
+    },
+    
+    
+   verGraficas: function () { 
+       
+        console.log('A pagina Graf.');
+        $.mobile.changePage('#graf', 'flip', false, true); 
+    
+   }
 
 };//fin app

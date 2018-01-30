@@ -100,6 +100,7 @@ var app = {
         btnFocoFuente.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
+        btnGraf.onclick=app.verGraficas;
         console.log("bindEvents:");
     },
     // deviceready Event Handler
@@ -758,7 +759,14 @@ var app = {
         
       $(panelCli).trigger("updatelayout");  
       console.log("onResClimaPanel");  
-    }
-
+    },
+    
+    
+   verGraficas: function () { 
+       
+        console.log('A pagina Graf.');
+        $.mobile.changePage('#graf', 'flip', false, true); 
+    
+   }
 
 };//fin app

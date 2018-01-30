@@ -50,6 +50,7 @@
                 <button id="btnValorPanel" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Dame Valor Panel Electrico</button>
                 <button id="btnReles" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Control Reles</button>
                 <button id="btnMeteo" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Clima</button>
+                <button id="btnGraf" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Graficos</button>
                 
                 <div id = "valor"  >
                     <p class="medida_div"> </p>
@@ -97,7 +98,8 @@
                   <a href="#"  id="btnFuOFF" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fuente OFF</a> 
                   <a href="#"  id="btnsonoff" class="ui-btn ui-btn-c ui-corner-all ui-shadow">SonOff</a>
                   <a href="#"  id="btnFocoFuente" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Foco Fuente</a> 
-                  <br/><br/><br/><br/><br/><br/>
+                  
+                  <br/><br/><br/><br/><br/>
                 <p>
                     
                 <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
@@ -111,14 +113,12 @@
                 
                 <p class="medida"> </p>
                
-                <canvas id="gaugeTemp"></canvas>
+                   <canvas id="gaugeTemp"></canvas>
                               
-                <canvas id="gaugeHumedad"></canvas>
+                   <canvas id="gaugeHumedad"></canvas>
                 
-                <canvas id="gaugePresion"></canvas>
-                
-                
-                  
+                   <canvas id="gaugePresion"></canvas>
+              
                   
                 <p>
                     
@@ -131,10 +131,37 @@
 
 
         </div> <!-- Pagina Principal -->
+        
+  <!--------------------------------------------------------------------->
+        
+    <div data-role="page" id="graf">
+            
+        <div data-role="header" class="ui-header-fixed">
+            <a href="#main" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-back ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
+            <h1 >Graficos</h1>
+           
+	</div><!-- /header --> 
+        
+           <div role="main" class="ui-content">
+	   <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/267256/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Corriente&type=line"></iframe>	
+		
+	   </div><!-- /content -->
+         
+            
+    </div>
+        
+        
+        <!----------------------------------------------------------------------->
 
         <div id="warning-message" >
             <h2 style="text-align:center;color:red;">Esta APP solo se ve en PORTRAIT</h2>
         </div>
+        
+        <!----------------------------------------------------------------------->
+        
+        
+        
+        
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/gauge.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
