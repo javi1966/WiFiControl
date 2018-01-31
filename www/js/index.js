@@ -87,7 +87,7 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnCerrar.ontouchstart = app.cerrar;
+        btnCerrar.ontclick = app.cerrar;
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
         //btnValorCorriente.onclick = app.dame_valor;
@@ -101,6 +101,7 @@ var app = {
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
         btnGraf.onclick=app.verGraficas;
+        
         console.log("bindEvents:");
     },
     // deviceready Event Handler
@@ -161,6 +162,8 @@ var app = {
          $("#divDesc").hide();
          $("#conectado").hide();
          $("#p_hora_alarma").hide();*/
+        
+        console.log(":onPageShow:");
     },
     onConfirmExit: function (buttonIndex) {
 
@@ -765,7 +768,7 @@ var app = {
    verGraficas: function () { 
        
         console.log('A pagina Graf.');
-        $.mobile.changePage('#graf', 'flip', false, true); 
+        $.mobile.changePage('#graf', 'slide', false, true); 
     
    }
 

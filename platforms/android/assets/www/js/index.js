@@ -87,7 +87,7 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnCerrar.ontouchstart = app.cerrar;
+        btnCerrar.ontclick = app.cerrar;
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
         //btnValorCorriente.onclick = app.dame_valor;
@@ -101,6 +101,7 @@ var app = {
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
         btnGraf.onclick=app.verGraficas;
+        
         console.log("bindEvents:");
     },
     // deviceready Event Handler

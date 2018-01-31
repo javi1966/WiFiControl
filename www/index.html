@@ -19,7 +19,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/> -->
+        <!-- <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/> -->
         <link rel="stylesheet" type="text/css" href="https://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css">
         <script  src="js/jquery-2.1.4.min.js"></script>
         <script  src="js/jquery.mobile-1.4.5.min.js"></script>
@@ -51,19 +51,19 @@
                 <button id="btnReles" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Control Reles</button>
                 <button id="btnMeteo" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Clima</button>
                 <button id="btnGraf" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Graficos</button>
-                
+
                 <div id = "valor"  >
                     <p class="medida_div"> </p>
-                    
+
                     <p class="valor_div blink"> </p>
                     <p class="magnitud_div blink"> </p> 
-                    
+
                 </div>
 
                 <div data-role="popup" id="popupAbout" style="background-color: black;" data-transition="flip"  class="ui-corner-all">
                     <div data-role="header"  style="margin-left:1%;margin-right:1%;margin-top:1%;background-color: black;"  class="ui-corner-all">
                         <h1 style="text-align:center;color:white;">About</h1>
-                            
+
                     </div>
                     <p style="text-align:center;color:graytext;font-size: 1.5em;">Wifi Control</p>
                     <p style="text-align:center;color:graytext;font-size: 1.3em;">&copy;Javier Espinosa Guerra</p>
@@ -72,96 +72,116 @@
                 </div>  <!-- POPUP ABOUT -->
 
             </div> <!-- Contenido -->
-            
+
             <div  data-role="panel" data-position="left" data-display="overlay" id="resulPanel">
                 <h1>Resultado</h1> 
                 <p class="medida"> </p>
-               
+
                 <canvas id="gaugeVolt"></canvas>
-                              
+
                 <canvas id="gaugeAmp"></canvas>
-                
-                
+
+
                 <p>
-                    
-                <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
-                   
+
+                    <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
+
                 </p>
-                
+
             </div> <!--Panel -->
-            
+
             <div  data-role="panel" data-position="right" data-display="overlay" id="relesPanel">
                 <h1>Reles</h1> 
-                
-                  <a href="#"  id="btnFuArriba" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fu. Arriba</a>
-                  <a href="#"  id="btnFuAbajo" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fu. Abajo</a>
-                  <a href="#"  id="btnFuOFF" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fuente OFF</a> 
-                  <a href="#"  id="btnsonoff" class="ui-btn ui-btn-c ui-corner-all ui-shadow">SonOff</a>
-                  <a href="#"  id="btnFocoFuente" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Foco Fuente</a> 
-                  
-                  <br/><br/><br/><br/><br/>
+
+                <a href="#"  id="btnFuArriba" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fu. Arriba</a>
+                <a href="#"  id="btnFuAbajo" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fu. Abajo</a>
+                <a href="#"  id="btnFuOFF" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Fuente OFF</a> 
+                <a href="#"  id="btnsonoff" class="ui-btn ui-btn-c ui-corner-all ui-shadow">SonOff</a>
+                <a href="#"  id="btnFocoFuente" class="ui-btn ui-btn-c ui-corner-all ui-shadow">Foco Fuente</a> 
+
+                <br/><br/><br/><br/><br/>
                 <p>
-                    
-                <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
-                   
+
+                    <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
+
                 </p>
-                
+
             </div> <!--Panel -->
-            
+
             <div  data-role="panel" data-position="left" data-display="overlay" id="panelClima">
                 <h1>Clima</h1> 
-                
+
                 <p class="medida"> </p>
-               
-                   <canvas id="gaugeTemp"></canvas>
-                              
-                   <canvas id="gaugeHumedad"></canvas>
-                
-                   <canvas id="gaugePresion"></canvas>
-              
-                  
+
+                <canvas id="gaugeTemp"></canvas>
+
+                <canvas id="gaugeHumedad"></canvas>
+
+                <canvas id="gaugePresion"></canvas>
+
+
                 <p>
-                    
-                <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
-                   
+
+                    <a href="#" data-rel="close"  class="ui-btn ui-btn-c ui-corner-all ui-shadow">Cierra</a>
+
                 </p>
-                
+
             </div> <!--Panel -->
-                
+
 
 
         </div> <!-- Pagina Principal -->
-        
-  <!--------------------------------------------------------------------->
-        
-    <div data-role="page" id="graf">
-            
-        <div data-role="header" class="ui-header-fixed">
-            <a href="#main" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-back ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
-            <h1 >Graficos</h1>
+
+        <!--------------------------------------------------------------------->
+
+        <div data-role="page" id="graf">
+
+            <div data-role="header" class="ui-header-fixed">
+                <a href="#main" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-back ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
+                <h1 >Graficos</h1>
+
+            </div><!-- /header --> 
+
+            <div role="main" class="ui-content">
+                <br/><br/>
+                <div >    
+                    <iframe width="355" height="200" style="border: 1px solid #cccccc;" 
+                            src="https://thingspeak.com/channels/267256/charts/1?api_key=0C2M9I6C2LOH21AI&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Corriente&type=line">
+
+                    </iframe>
+                </div>
+               
+                <div>    
+                    <iframe width="355" height="200" style="border: 1px solid #cccccc;" 
+                            src="https://thingspeak.com/channels/172131/charts/1?api_key=SQ0AWSJRWFJ8Z7O1&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperatura&type=line">
+
+                    </iframe>
+                </div>
+                
+                <div>    
+                    <iframe width="355" height="200" style="border: 1px solid #cccccc;" 
+                            src="https://thingspeak.com/channels/172131/charts/2?api_key=SQ0AWSJRWFJ8Z7O1&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Humedad&type=line">
+
+                    </iframe>
+                </div>
            
-	</div><!-- /header --> 
-        
-           <div role="main" class="ui-content">
-	   <!--<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/267256/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Corriente&type=line"></iframe>	-->
-		
-	   </div><!-- /content -->
-         
-            
-    </div>
-        
-        
+            </div><!-- /content -->
+
+
+        </div>
+
+
         <!----------------------------------------------------------------------->
 
         <div id="warning-message" >
             <h2 style="text-align:center;color:red;">Esta APP solo se ve en PORTRAIT</h2>
         </div>
-        
+
         <!----------------------------------------------------------------------->
-        
-        
-        
-        
+
+
+
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/gauge.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
