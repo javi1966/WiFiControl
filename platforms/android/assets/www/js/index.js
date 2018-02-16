@@ -162,6 +162,8 @@ var app = {
          $("#divDesc").hide();
          $("#conectado").hide();
          $("#p_hora_alarma").hide();*/
+        
+        console.log(":onPageShow:");
     },
     onConfirmExit: function (buttonIndex) {
 
@@ -766,7 +768,7 @@ var app = {
    verGraficas: function () { 
        
         console.log('A pagina Graf.');
-        $.mobile.changePage('#graf', 'flip', false, true); 
+        $.mobile.changePage('#graf', 'slide', false, true); 
     
    }
 
