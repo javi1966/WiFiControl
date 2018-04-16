@@ -87,7 +87,8 @@ var app = {
          setHora.ontouchstart = app.ponHora;
          setAlarma.onclick = app.abrePopupAlarma;
          popOK.ontouchstart = app.ponAlarma;*/
-        btnCerrar.ontclick = app.cerrar;
+        
+       
         btnValorTension.ontouchstart = app.dame_valor;
         btnValorCorriente.ontouchstart = app.dame_valor;
         //btnValorCorriente.onclick = app.dame_valor;
@@ -100,8 +101,10 @@ var app = {
         btnFocoFuente.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
-        btnGraf.onclick=app.verGraficas;
-        
+        btnGraf.ontouchstart=app.verGraficas;
+        btnGrafPatio.ontouchstart=app.verGraficasPatio;
+        btnCerrar.onclick = app.onCerrar;
+         
         console.log("bindEvents:");
     },
     // deviceready Event Handler
@@ -175,7 +178,7 @@ var app = {
         }
     },
 
-    cerrar: function () {
+    onCerrar: function () {
 
         // navigator.app.exitApp();
         navigator.notification.confirm(
@@ -190,9 +193,8 @@ var app = {
     about: function () {
         $('#popupAbout').popup('open');
         console.log("about");
-    }
-    ,
-    onResumedApp: function () {
+    },
+     onResumedApp: function () {
 
         console.log("OnResumedApp");
 
@@ -768,8 +770,43 @@ var app = {
    verGraficas: function () { 
        
         console.log('A pagina Graf.');
+        
+        $('<iframe>')
+               .attr("style","border: 1px solid #cccccc;" )
+               .attr("src","https://thingspeak.com/channels/267256/charts/1?api_key=0C2M9I6C2LOH21AI&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Corriente&type=line" )
+               .appendTo("#grafCorriente");
+    
+       $('<iframe>')
+               .attr("style","border: 1px solid #cccccc;" )
+               .attr("src","https://thingspeak.com/channels/172131/charts/1?api_key=SQ0AWSJRWFJ8Z7O1&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Temperatura&type=line" )
+               .appendTo("#grafTemperatura");
+       
+        $('<iframe>')
+               .attr("style","border: 1px solid #cccccc;" )
+               .attr("src","https://thingspeak.com/channels/172131/charts/4?api_key=SQ0AWSJRWFJ8Z7O1&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temp. Salon&type=line" )
+               .appendTo("#grafTempSalon");
+        
         $.mobile.changePage('#graf', 'slide', false, true); 
     
+   },
+   verGraficasPatio: function (){
+       
+       console.log('A pagina Graf. Patio');
+       
+       
+       
+       
+       $('<iframe>')
+               .attr("style","border: 1px solid #cccccc;" )
+               .attr("src","https://thingspeak.com/channels/338363/charts/1?api_key=F6LVI3CTGDLKJOLM&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Butano&type=line" )
+               .appendTo("#grafButano");
+    
+       $('<iframe>')
+               .attr("style","border: 1px solid #cccccc;" )
+               .attr("src","https://thingspeak.com/channels/338363/charts/2?api_key=F6LVI3CTGDLKJOLM&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Temperatura&type=line" )
+               .appendTo("#grafTemp");
+       
+       $.mobile.changePage('#graf_patio', 'slide', false, true); 
    }
 
 };//fin app

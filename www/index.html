@@ -34,7 +34,7 @@
         <div data-role="page" id="main">
 
             <div data-role="header" class="ui-header-fixed  ui-shadow">
-                <a href="#" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-power ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
+                <a href="#" id="btnCerrar" class="ui-btn ui-btn-left  ui-btn-icon-left ui-icon-power ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
                 <a href="#" id="btnAbout"  class="ui-btn ui-btn-right ui-btn-icon-right ui-icon-info ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
                 <h1 >WiFi Control</h1>
 
@@ -45,13 +45,14 @@
 
                 <br/><br/><br/>
 
-                <button id="btnValorTension"  class="ui-btn ui-btn-b ui-corner-all ui-shadow">Dame Valor Tension</button>
-                <button id="btnValorCorriente" class="ui-btn ui-btn-b ui-corner-all ui-shadow" >Dame Valor Corriente</button>
+                <button id="btnValorTension"  class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline">Valor Tension</button>
+                <button id="btnValorCorriente" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-inline" >Valor\n Corriente</button>
                 <button id="btnValorPanel" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Dame Valor Panel Electrico</button>
                 <button id="btnReles" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Control Reles</button>
                 <button id="btnMeteo" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Clima</button>
-                <button id="btnGraf" class="ui-btn  ui-btn-b ui-corner-all ui-shadow" >Graficos</button>
-
+                <button id="btnGraf" class="ui-btn  ui-btn-b ui-corner-all ui-shadow ui-btn-inline" >Graficos</button>
+                <button id="btnGrafPatio" class="ui-btn  ui-btn-b ui-corner-all ui-shadow ui-btn-inline" >Graficos Patio</button> 
+                
                 <div id = "valor"  >
                     <p class="medida_div"> </p>
 
@@ -144,27 +145,32 @@
 
             <div role="main" class="ui-content">
                 <br/><br/>
-                <div class="iframe-container iframe-container-for-wxh-500x350">
-                     
+                <div id="grafCorriente" class="iframe-container iframe-container-for-wxh-500x350">
+                   <!--   
                     <iframe   style="border: 1px solid #cccccc;" 
                             src="https://thingspeak.com/channels/267256/charts/1?api_key=0C2M9I6C2LOH21AI&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Corriente&type=line">
 
                     </iframe> 
+                   -->
                 </div>
                
-                <div class="iframe-container iframe-container-for-wxh-500x350">    
+                <div id="grafTemperatura" class="iframe-container iframe-container-for-wxh-500x350">    
+                     <!--  
                     <iframe   style="border: 1px solid #cccccc;" 
                             src="https://thingspeak.com/channels/172131/charts/1?api_key=SQ0AWSJRWFJ8Z7O1&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Temperatura&type=line">
 
                     </iframe> 
+                     -->
                 </div>
                 
-                <div class="iframe-container iframe-container-for-wxh-500x350"> 
+                <div id="grafTempSalon" class="iframe-container iframe-container-for-wxh-500x350"> 
                    
+                    <!-- 
                     <iframe  style="border: 1px solid #cccccc;" 
                             src="https://thingspeak.com/channels/172131/charts/4?api_key=SQ0AWSJRWFJ8Z7O1&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temp. Salon&type=line">
                           
                     </iframe> 
+                    -->
                 </div>
            
             </div><!-- /content -->
@@ -172,6 +178,42 @@
 
         </div>
 
+        
+ <!----------------------------------------------------------------------------->
+         <div data-role="page" id="graf_patio">
+
+            <div data-role="header" class="ui-header-fixed">
+                <a href="#main" id="btnCerrar" class="ui-btn ui-btn-left ui-btn-icon-left ui-icon-back ui-shadow-icon ui-corner-all ui-btn-icon-notext"></a> 
+                <h1 >Graficos</h1>
+
+            </div><!-- /header --> 
+
+            <div role="main" class="ui-content">
+                <br/><br/>
+                <div id="grafButano" class="iframe-container iframe-container-for-wxh-500x350">
+                   <!--  
+                    <iframe   style="border: 1px solid #cccccc;" 
+                             src="https://thingspeak.com/channels/338363/charts/1?api_key=F6LVI3CTGDLKJOLM&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Butano&type=line">
+
+                    </iframe>
+                   -->
+                </div>
+               
+                <div id="grafTemp" class="iframe-container iframe-container-for-wxh-500x350">    
+                     <!--  
+                    <iframe   style="border: 1px solid #cccccc;" 
+                            src="https://thingspeak.com/channels/338363/charts/2?api_key=F6LVI3CTGDLKJOLM&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Temperatura&type=line">
+
+                    </iframe>
+                     --> 
+                </div>
+                
+                
+           
+            </div><!-- /content -->
+
+
+        </div>
 
         <!----------------------------------------------------------------------->
 
@@ -180,9 +222,6 @@
         </div>
 
         <!----------------------------------------------------------------------->
-
-
-
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/gauge.min.js"></script>
