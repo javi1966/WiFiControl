@@ -51,6 +51,7 @@ var bRele_1 = false;
 var bRele_2 = false;
 var bReleSonOff = false;
 var bFocoFuente = false;
+var bDepuradora = false;
 
 //****************************************************************************
 
@@ -99,6 +100,7 @@ var app = {
         btnFuOFF.ontouchstart = app.pulso_rele;
         btnsonoff.ontouchstart = app.pulso_rele;
         btnFocoFuente.ontouchstart = app.pulso_rele;
+        btnDepuradora.ontouchstart = app.pulso_rele;
         btnAbout.onclick = app.about;
         btnMeteo.ontouchstart=app.verClima;
         btnGraf.ontouchstart=app.verGraficas;
@@ -475,6 +477,25 @@ var app = {
 
                 console.log("Rele SonOff: " + bFocoFuente);
                 break;
+                
+            case "btnDepuradora":
+
+                bDepuradora = !bDepuradora;
+
+                $.post(bDepuradora ? "http://192.168.1.49/rele1/on/"
+                        : "http://192.168.1.49/rele1/off/")
+                        
+                        .done(function (data){
+                       // function (data,status) {
+                            toast("Pulsado: " + data + "\nStatus: " + status);
+                            console.log("Rele depuradora: " + data);
+                        })
+                        .fail(function(error) {
+                                alert("Error: "+error.responseText);
+                         });
+
+                console.log("Rele Depuradora: " + bdepuradora);
+                break;    
 
             default:
                 break;
