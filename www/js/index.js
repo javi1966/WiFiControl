@@ -814,9 +814,6 @@ var app = {
        
        console.log('A pagina Graf. Patio');
        
-       
-       
-       
        $('<iframe>')
                .attr("style","border: 1px solid #cccccc;" )
                .attr("src","https://thingspeak.com/channels/338363/charts/1?api_key=F6LVI3CTGDLKJOLM&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Butano&type=line" )
@@ -826,6 +823,11 @@ var app = {
                .attr("style","border: 1px solid #cccccc;" )
                .attr("src","https://thingspeak.com/channels/338363/charts/2?api_key=F6LVI3CTGDLKJOLM&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Temperatura&type=line" )
                .appendTo("#grafTemp");
+       
+       $('<iframe>')
+               .attr("style","border: 1px solid #cccccc;" )
+               .attr("src","https://thingspeak.com/channels/660767/charts/1?api_key=03UGM7YBNOHC4G1R&bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=80&title=Peso Bombona&type=line" )
+               .appendTo("#grafPesoBombona");
        
        $.mobile.changePage('#graf_patio', 'slide', false, true); 
    }
