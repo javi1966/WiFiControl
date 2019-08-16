@@ -29,7 +29,8 @@ var toast = function (msg) {
                 "-webkit-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
                 "-moz-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
                 "-ms-box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
-                "box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)"
+                "box-shadow": "10px 10px 5px 0px rgba(102,102,102,0.65)",
+                "color":"white"
             })
 
             .appendTo("body").delay(3000)
@@ -95,9 +96,9 @@ var app = {
         //btnValorCorriente.onclick = app.dame_valor;
         btnValorPanel.ontouchstart = app.dame_valor;
         btnReles.ontouchstart = app.controlReles;
-        btnFuArriba.ontouchstart = app.pulso_rele;
-        btnFuAbajo.ontouchstart = app.pulso_rele;
-        btnFuOFF.ontouchstart = app.pulso_rele;
+        btnLuzEstanque.ontouchstart = app.pulso_rele;
+        btnFiltroEstanque.ontouchstart = app.pulso_rele;
+        //btnFuOFF.ontouchstart = app.pulso_rele;
         btnsonoff.ontouchstart = app.pulso_rele;
         btnFocoFuente.ontouchstart = app.pulso_rele;
         btnDepuradora.ontouchstart = app.pulso_rele;
@@ -376,11 +377,11 @@ var app = {
         //toast("Pulsado Rele "+id);
 
         switch (id) {
-            case "btnFuArriba":
+            case "btnLuzEstanque":
 
                 bRele_1 = !bRele_1;
-                $.post(bRele_1 ? "http://192.168.1.45/rele1/on/"
-                        : "http://192.168.1.45/rele1/off/")
+                $.post(bRele_1 ? "http://192.168.1.245/rele2/on/"
+                        : "http://192.168.1.245/rele2/off/")
                        .done(function (data) {
                        // function (data,status) {
                             toast("Pulsado: " + data);
@@ -390,16 +391,14 @@ var app = {
                                alert("Error: "+error.responseText);
                          });
 
-
-                
                 break;
 
-            case "btnFuAbajo":
+            case "btnFiltroEstanque":
 
                 bRele_2 = !bRele_2;
 
-                $.post(bRele_2 ? "http://192.168.1.45/rele2/on/"
-                        : "http://192.168.1.45/rele2/off/")
+                $.post(bRele_2 ? "http://192.168.1.245/rele1/on/"
+                        : "http://192.168.1.245/rele1/off/")
                         
                         .done(function (data) {
                        // function (data,status) {
@@ -413,7 +412,7 @@ var app = {
                
                 break;
 
-            case "btnFuOFF":
+         /*   case "btnFuOFF":
 
                 $.post("http://192.168.1.45/rele1/off/")
                         .done(function (data){
@@ -440,7 +439,7 @@ var app = {
                          });
 
                 
-                break;
+                break;*/
             case "btnsonoff":
 
                 bReleSonOff = !bReleSonOff;
@@ -459,6 +458,7 @@ var app = {
 
                 console.log("Rele SonOff: " + bReleSonOff);
                 break;
+                
             case "btnFocoFuente":
 
                 bFocoFuente = !bFocoFuente;
